@@ -1,0 +1,34 @@
+<nz-modal
+  [(nzVisible)]="formVisible"
+  [nzTitle]="title"
+  [nzFooter]="foot"
+  (nzOnCancel)="cerrarForm()"
+  nzWrapClassName="vertical-center-modal">
+  <ng-template #title>
+    <span class="titulo-form">{{ tituloForm }}</span>
+  </ng-template>
+
+  <form nz-form  [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzFor="idregion" nzRequired>Código</nz-form-label>
+      <nz-form-control [nzSm]="19" nzErrorTip="Requerido. Permitido: 1 al 9." >
+        <nz-input-number [nzDisabled]="modoEditar" [nzMin]="1" [nzMax]="9" formControlName="idregion" [nzPlaceHolder]="'ID'" ></nz-input-number>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzFor="nombre" nzRequired>Nombre</nz-form-label>
+      <nz-form-control [nzSm]="19" nzErrorTip="Requerido. Longitud máxima 45." >
+        <input nz-input formControlName="nombre" placeholder="Nombre" />
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+  <nz-alert *ngIf="msgVisible" [nzType]="tipoMsg" [nzMessage]="msg" [nzDescription]="msgDetail" nzShowIcon nzCloseable (nzOnClose)="postCerraMsg()" ></nz-alert>
+  <ng-template #foot>
+    <button nz-button nzType="default" (click)="cerrarForm()">Cerrar</button>
+    <button nz-button nzType="primary" (click)="guardarRegion()" >
+      <i nz-icon nzType="save" ></i>
+      Guardar
+    </button>
+  </ng-template>
+</nz-modal>

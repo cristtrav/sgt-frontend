@@ -1,0 +1,32 @@
+<div>
+  <button nz-button nzType="primary" (click)="nuevaRegion()">
+    <i nz-icon nzType="plus" ></i>
+    Agregar
+  </button>
+  <app-form-region [(formVisible)]="formVisible" [regionEdit]="regionEditar" (saved)="regionSaved()"></app-form-region>
+</div>
+<div style="margin-top: 10px">
+  <nz-table [nzData]="regiones" >
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let region of regiones">
+        <td>{{ region.idregion }}</td>
+        <td>{{ region.nombre }}</td>
+        <td>
+          <button nzType="primary" (click)="editarRegion(region)" nzGhost nz-button>
+            <i nz-icon nzType="edit" ></i>
+          </button>
+          <button style="margin-left: 5px" nzType="danger" (click)="confirmarEliminacion(region)" nzGhost nz-button>
+            <i nz-icon nzType="delete" ></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
