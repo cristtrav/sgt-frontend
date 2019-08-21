@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegionDTO } from '../../../../dto/RegionDTO';
 import { RegionesService } from '../../../../services/regiones.service';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzModalService, NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-vista-regiones',
@@ -16,12 +16,9 @@ export class VistaRegionesComponent implements OnInit {
 
   regionEditar: RegionDTO;
 
-  constructor(private regionesService: RegionesService, private modalSrv: NzModalService) {
-    this.regionesService.getData().subscribe(data => {
-      this.regiones = data;
-    }, error => {
-      console.log('Eror al cargar');
-    });
+  constructor(private regionesService: RegionesService,
+    private modalSrv: NzModalService,
+    private notification: NzNotificationService) {
   }
 
   private recargarRegiones(): void {
@@ -33,6 +30,7 @@ export class VistaRegionesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.recargarRegiones();
   }
 
   nuevaRegion() {
@@ -57,11 +55,17 @@ export class VistaRegionesComponent implements OnInit {
       nzContent: '<b>' + region.idregion + ' - ' + region.nombre + '</b>',
       nzOkType: 'danger',
       nzOkText: 'Eliminar',
-      nzWrapClassName : 'vertical-center-modal',
+      nzWrapClassName: 'vertical-center-modal',
       nzOnOk: () => {
         this.regionesService.deleteData(region).subscribe(() => {
           this.recargarRegiones();
         }, error => {
+          if (typeof error.error === 'string') {
+            this.notification.create('error', 'Error al eliminar', error.error);
+          } else {
+            this.notification.create('error', 'Error al guardar', error.message);
+          }
+
           console.log(error);
         });
       }

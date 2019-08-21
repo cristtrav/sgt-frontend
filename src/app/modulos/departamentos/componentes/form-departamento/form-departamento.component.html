@@ -1,0 +1,42 @@
+<nz-modal [(nzVisible)]="isFormVisible" nzWrapClassName="vertical-center-modal" [nzFooter]="foot"
+  (nzOnCancel)="cerrarForm()" [nzTitle]="title">
+  <ng-template #title>
+    <span style="font-weight: bold" class="titulo-form">{{ tituloForm }}</span>
+  </ng-template>
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired nzFor="iddepartamento">Código</nz-form-label>
+      <nz-form-control [nzSm]="19" nzErrorTip="Campo requerido. Valores permitidos: 1 al 99">
+        <nz-input-number [nzDisabled]="modoEditar" nzPlaceHolder="ID" formControlName="iddepartamento">
+          nzMin="1" nzMax="99"></nz-input-number>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired nzFor="nombre">Nombre</nz-form-label>
+      <nz-form-control [nzSm]="19" nzErrorTip="Campo requerido. Longitud máxima: 45">
+        <input nz-input name="nombre" placeholder="Nombre" formControlName="nombre" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="4" nzRequired nzFor="idregion">Región</nz-form-label>
+      <nz-form-control [nzSm]="19" nzErrorTip="Campo requerido. Seleccione de la lista.">
+        <nz-select name="idregion" (nzOpenChange)="cargarRegiones()" nzPlaceHolder="Seleccionar..." formControlName="idregion" nzAllowClear>
+          <nz-option *ngFor="let region of regiones" [nzLabel]="region.nombre" [nzValue]="region.idregion" ></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+
+  <div *ngIf="isMsgVisible">
+    <nz-alert [nzType]="msgType" [nzMessage]="msg" [nzDescription]="msgDescription" (nzOnClose)="handleCloseMsg()" nzShowIcon nzCloseable></nz-alert>
+  </div>
+  <ng-template #foot>
+    <button nz-button nzType="default" (click)="cerrarForm()">Cerrar</button>
+    <button nz-button nzType="primary" (click)="guardar()">
+      <i nz-icon nzType="save"></i>
+      Guardar
+    </button>
+  </ng-template>
+</nz-modal>

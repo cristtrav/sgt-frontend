@@ -1,0 +1,34 @@
+<div>
+  <app-form-departamento [(isFormVisible)]="isFormVisible" (saved)="handleSave()" [departamentoEdit]="departamentoEdit" ></app-form-departamento>
+  <button nz-button nzType="primary" (click)="nuevoDepartamento()">
+    <i nz-icon nzType="plus"></i>
+    Agregar
+  </button>
+</div>
+<div style="margin-top: 10px">
+<nz-table [nzData]="departamentos">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Nombre</th>
+      <th>Región</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let departamento of departamentos">
+      <td> {{ departamento.iddepartamento }} </td>
+      <td> {{ departamento.nombre }} </td>
+      <td> {{ departamento.idregion }}-{{ departamento.region }}</td>
+      <td>
+        <button nz-button nzType="primary" nzGhost (click)="editarDepartamento(departamento)">
+          <i nz-icon nzType="edit"></i>
+        </button>
+        <button style="margin-left: 5px" nz-button nzType="danger" nzGhost (click)="confirmarEliminacion(departamento)">
+          <i nz-icon nzType="delete"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+</div>

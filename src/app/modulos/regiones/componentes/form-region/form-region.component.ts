@@ -12,7 +12,7 @@ export class FormRegionComponent implements OnInit {
   @Input()
   set formVisible(v: boolean) {
     if (v) {
-      if (!this.modoEditar ) {
+      if (!this.modoEditar) {
         this.msgVisible = false;
       }
     }
@@ -34,7 +34,7 @@ export class FormRegionComponent implements OnInit {
     } else {
       this.modoEditar = false;
       this.tituloForm = 'Nueva Región';
-      if  (this.form != null) {
+      if (this.form != null) {
         this.form.reset();
       }
       console.log('region editar null');
@@ -47,7 +47,8 @@ export class FormRegionComponent implements OnInit {
   @Output()
   saved = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder, private regionesService: RegionesService) { }
+  constructor(private formBuilder: FormBuilder,
+              private regionesService: RegionesService) { }
 
   tituloForm = 'Nueva Región';
   private frmVis: boolean;

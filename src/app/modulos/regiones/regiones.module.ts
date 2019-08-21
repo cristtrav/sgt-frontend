@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgZorroAntdModule, NZ_I18N, es_ES } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_I18N, es_ES, NzNotificationService } from 'ng-zorro-antd';
 import { RegionesRoutingModule } from './regiones-routing.module';
 import { VistaRegionesComponent } from './componentes/vista-regiones/vista-regiones.component';
 import { FormRegionComponent } from './componentes/form-region/form-region.component';
@@ -20,6 +20,6 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   exports: [VistaRegionesComponent],
-  providers: [{ provide: NZ_I18N, useValue: es_ES }, RegionesService]
+  providers: [{ provide: NZ_I18N, useValue: es_ES }, RegionesService, NzNotificationService]
 })
 export class RegionesModule { }
