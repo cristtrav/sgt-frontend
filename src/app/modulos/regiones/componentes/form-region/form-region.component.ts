@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { RegionDTO } from 'src/app/dto/RegionDTO';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { RegionDTO } from './../../../../dto/RegionDTO';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegionesService } from '../../../../services/regiones.service';
-import { CaretRightFill } from '@ant-design/icons-angular/icons/public_api';
 
 @Component({
   selector: 'app-form-region',
