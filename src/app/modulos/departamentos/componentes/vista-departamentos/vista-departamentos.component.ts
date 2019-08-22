@@ -15,8 +15,8 @@ export class VistaDepartamentosComponent implements OnInit {
   departamentoEdit: DepartamentoDTO;
 
   constructor(private departamentosSrv: DepartamentosService,
-    private modalSrv: NzModalService,
-    private nzNotificationSrv: NzNotificationService) { }
+              private modalSrv: NzModalService,
+              private nzNotificationSrv: NzNotificationService) { }
 
   ngOnInit() {
     this.getDepartamentos();

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DepartamentoDTO } from 'src/app/dto/DepartamentoDTO';
 import { DepartamentosService } from './../../../../services/departamentos.service';
 import { RegionesService } from './../../../../services/regiones.service';
-import { RegionDTO } from 'src/app/dto/RegionDTO';
+import { RegionDTO } from './../../../../dto/RegionDTO';
 
 @Component({
   selector: 'app-form-departamento',
