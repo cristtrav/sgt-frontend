@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DepartamentoDTO } from 'src/app/dto/DepartamentoDTO';
+import { DepartamentoDTO } from './../../../../dto/DepartamentoDTO';
 import { DepartamentosService } from './../../../../services/departamentos.service';
 import { RegionesService } from './../../../../services/regiones.service';
 import { RegionDTO } from './../../../../dto/RegionDTO';
