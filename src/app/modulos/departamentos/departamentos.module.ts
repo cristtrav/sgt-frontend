@@ -6,7 +6,7 @@ import { NgZorroAntdModule, NZ_I18N, es_ES } from 'ng-zorro-antd';
 import { DepartamentosService } from './../../services/departamentos.service';
 import { FormDepartamentoComponent } from './componentes/form-departamento/form-departamento.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NzNotificationService } from 'ng-zorro-antd/notification'
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 
 @NgModule({

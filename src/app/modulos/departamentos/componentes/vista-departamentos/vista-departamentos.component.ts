@@ -58,9 +58,9 @@ export class VistaDepartamentosComponent implements OnInit {
           this.getDepartamentos();
         }, error => {
           if (typeof error.error === 'string') {
-            this.nzNotificationSrv.create('error', 'Error al guardar', error.error);
+            this.nzNotificationSrv.create('error', 'Error al eliminar', error.error);
           } else {
-            this.nzNotificationSrv.create('error', 'Error al guardar', error.error);
+            this.nzNotificationSrv.create('error', 'Error al eliminar', error.message);
           }
           console.log(error);
         });

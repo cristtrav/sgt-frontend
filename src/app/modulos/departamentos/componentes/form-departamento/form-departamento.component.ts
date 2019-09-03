@@ -23,17 +23,6 @@ export class FormDepartamentoComponent implements OnInit {
   msgDescription = '';
   regiones: RegionDTO[];
 
-  items = [
-    {
-      title: 'Item 1',
-      id: 1
-    },
-    {
-      title: 'Item 2',
-      id: 2
-    }
-  ];
-
   @Input()
   set isFormVisible(visible: boolean) {
     this.modalVisible = visible;
@@ -67,7 +56,9 @@ export class FormDepartamentoComponent implements OnInit {
   @Output()
   saved = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder, private departamentoSrv: DepartamentosService, private regionesSrv: RegionesService) { }
+  constructor(private formBuilder: FormBuilder,
+              private departamentoSrv: DepartamentosService,
+              private regionesSrv: RegionesService) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
