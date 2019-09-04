@@ -19,7 +19,7 @@
     <tr *ngFor="let departamento of departamentos">
       <td> {{ departamento.iddepartamento }} </td>
       <td> {{ departamento.nombre }} </td>
-      <td> {{ departamento.idregion }}-{{ departamento.region }}</td>
+      <td> {{ departamento.region }}</td>
       <td>
         <button nz-button nzType="primary" nzGhost (click)="editarDepartamento(departamento)">
           <i nz-icon nzType="edit"></i>

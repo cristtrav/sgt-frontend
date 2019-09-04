@@ -56,9 +56,9 @@ export class FormCiudadComponent implements OnInit {
   saved = new EventEmitter();
 
   constructor(private departamentosSrv: DepartamentosService,
-    private ciudadesSrv: CiudadesService,
-    private notification: NzNotificationService,
-    private formBuilder: FormBuilder) { }
+              private ciudadesSrv: CiudadesService,
+              private notification: NzNotificationService,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({

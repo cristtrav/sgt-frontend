@@ -1,0 +1,58 @@
+<form [formGroup]="form" nz-form>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="labelSize" nzRequired>C.I.</nz-form-label>
+    <nz-form-control [nzSm]="controlSize" nzErrorTip="Requerido">
+      <nz-input-number [nzDisabled]="modoEditar" style="width: 100%" nzPlaceHolder="Ej.: 4563987" formControlName="ci"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="labelSize" nzRequired>Nombres</nz-form-label>
+    <nz-form-control [nzSm]="controlSize" nzErrorTip="Requerido. Longitud máxima: 50">
+      <input nz-input placeholder="Ej.: Juan" formControlName="nombres" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="labelSize" nzRequired>Apellidos</nz-form-label>
+    <nz-form-control [nzSm]="controlSize" nzErrorTip="Requerido. Longitud máxima: 50">
+      <input nz-input placeholder="Ej.: Perez" formControlName="apellidos" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="labelSize" nzRequired>Ciudad</nz-form-label>
+    <nz-form-control [nzSm]="controlSize" nzErrorTip="Requerido. Seleccione una ciudad">
+      <nz-select nzPlaceHolder="Seleccionar..." formControlName="idciudad" nzShowSearch nzAllowClear>
+        <nz-option *ngFor="let ciudad of ciudades" [nzLabel]="ciudad.nombre+' ('+ciudad.departamento+')'" [nzValue]="ciudad.idciudad"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="labelSize">DV RUC</nz-form-label>
+    <nz-form-control [nzSm]="controlSize">
+        <nz-input-number nzPlaceHolder="Ej.: 4" nzMax="9" nzMin="0" formControlName="dvruc"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="labelSize">Teléfono</nz-form-label>
+    <nz-form-control [nzSm]="controlSize">
+      <input nz-input placeholder="Ej: 0971203040" formControlName="telefono" />
+    </nz-form-control>
+  </nz-form-item>
+
+
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="labelSize">Ingreso</nz-form-label>
+    <nz-form-control [nzSm]="controlSize">
+      <nz-date-picker formControlName="fechaingreso" nzFormat="dd/MM/yyyy"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+</form>
+
+<nz-alert *ngIf="msgVisible" [nzType]="tipoMsg" [nzMessage]="msg" [nzDescription]="descripcionMsg" nzShowIcon nzCloseable></nz-alert>

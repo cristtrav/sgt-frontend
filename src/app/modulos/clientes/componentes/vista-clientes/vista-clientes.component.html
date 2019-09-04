@@ -1,0 +1,59 @@
+<div>
+  <button nz-button nzType="primary" (click)="nuevoCliente()">
+    <i nz-icon nzType="plus"></i>
+    Agregar
+  </button>
+  <nz-modal [nzVisible]="formVisible" [nzTitle]="titulo" [nzFooter]="pie" nzWrapClassName="vertical-center-modal" (nzOnCancel)="cerrarForm()" >
+
+    <ng-template #titulo>
+      <span *ngIf="formComponent.modoEditar == false" style="font-weight: bold">Nuevo Cliente</span>
+      <span *ngIf="formComponent.modoEditar" style="font-weight: bold">Editar Cliente</span>
+    </ng-template>
+
+    <app-form-cliente (saved)="cargarClientes()"></app-form-cliente>
+
+    <ng-template #pie>
+      <button nz-button nzType="default" (click)="cerrarForm()" >Cerrar</button>
+      <button nz-button nzType="primary" (click)="guardarCliente()">
+        <i nz-icon nzType="save"></i>
+        Guardar
+      </button>
+    </ng-template>
+
+  </nz-modal>
+</div>
+<div style="margin-top: 10px;">
+  <nz-table #tabla [nzData]="clientes" >
+    <thead>
+      <tr>
+        <th>CI</th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Ciudad</th>
+        <th>DV RUC</th>
+        <th>Teléfono</th>
+        <th>Ingreso</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of tabla.data">
+        <td>{{ cliente.ci }}</td>
+        <td>{{ cliente.nombres }}</td>
+        <td>{{ cliente.apellidos }}</td>
+        <td>{{ cliente.ciudad }} - {{ cliente.departamento }}</td>
+        <td>{{ cliente.dvRuc }}</td>
+        <td>{{ cliente.telefono }}</td>
+        <td>{{ formatDate(cliente.fechaIngreso) }}</td>
+        <td>
+          <button nz-button nzType="primary" (click)="editarCliente(cliente)" nzGhost>
+            <i nz-icon nzType="edit"></i>
+          </button>
+          <button style="margin-left: 5px" nz-button nzType="danger" (click)="confirmarEliminacion(cliente)" nzGhost>
+            <i nz-icon nzType="delete"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

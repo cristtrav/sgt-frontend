@@ -49,7 +49,7 @@ export class VistaCiudadesComponent implements OnInit {
 
   confirmarEliminacion(ciudad: CiudadDTO) {
     this.modal.confirm({
-      nzTitle: '<i>¿Desea eliminar la ciudd?</i>',
+      nzTitle: '<i>¿Desea eliminar la ciudad?</i>',
       nzContent: '<b>' + ciudad.idciudad + ' - ' + ciudad.nombre + '</b>',
       nzOkType: 'danger',
       nzOkText: 'Eliminar',
