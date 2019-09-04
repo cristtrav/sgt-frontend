@@ -6,7 +6,7 @@
   <app-form-region [(formVisible)]="formVisible" [regionEdit]="regionEditar" (saved)="regionSaved()"></app-form-region>
 </div>
 <div style="margin-top: 10px">
-  <nz-table [nzData]="regiones" >
+  <nz-table #tabla [nzData]="regiones" >
     <thead>
       <tr>
         <th>Código</th>
@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let region of regiones">
+      <tr *ngFor="let region of tabla.data">
         <td>{{ region.idregion }}</td>
         <td>{{ region.nombre }}</td>
         <td>

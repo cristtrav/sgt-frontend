@@ -23,7 +23,16 @@
   </nz-modal>
 </div>
 <div style="margin-top: 10px;">
-  <nz-table #tabla [nzData]="clientes" >
+  <nz-table #tabla
+  nzFrontPagination="false"
+  [nzLoading]="tableLoading"
+  [nzData]="clientes"
+  [(nzPageSize)]="pageSize"
+  [(nzPageIndex)]="pageIndex"
+  [nzTotal]="totalConsulta"
+  (nzPageIndexChange)="cargarClientes()"
+  (nzPageSizeChange)="cambioTamanioPagina()"
+  nzShowSizeChanger>
     <thead>
       <tr>
         <th>CI</th>

@@ -14,27 +14,52 @@ export class VistaClientesComponent implements OnInit {
   formVisible = false;
   clientes: ClienteDTO[];
 
+  pageSize = 10;
+  pageIndex = 1;
+  totalConsulta = 1;
+  tableLoading = false;
+
   @ViewChild(FormClienteComponent, { static: false })
   formComponent: FormClienteComponent;
 
   constructor(private clientesSrv: ClientesService,
-              private notification: NzNotificationService,
-              private modal: NzModalService) { }
+    private notification: NzNotificationService,
+    private modal: NzModalService) { }
 
   ngOnInit() {
     this.cargarClientes();
+    this.cargarTotalClientes();
+  }
+
+  cargarTotalClientes() {
+    this.clientesSrv.getTotal().subscribe((data) => {
+      this.totalConsulta = data;
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   cargarClientes() {
-    this.clientesSrv.getData().subscribe((data) => {
+    this.tableLoading = true;
+    const limit = this.pageSize;
+    const offset = (this.pageIndex - 1) * this.pageSize;
+    this.clientesSrv.getData(limit, offset).subscribe((data) => {
       this.clientes = data;
+      this.cargarTotalClientes();
+      this.tableLoading = false;
     }, (err) => {
+      this.tableLoading = false;
       if (typeof err.error === 'string') {
         this.notification.create('error', 'Error al cargar clientes', err.error);
       } else {
         this.notification.create('error', 'Error al cargar clientes', err.message);
       }
     });
+  }
+
+  cambioTamanioPagina() {
+    this.pageIndex = 1;
+    this.cargarClientes();
   }
 
   nuevoCliente() {

@@ -6,7 +6,7 @@
   </button>
 </div>
 <div style="margin-top: 10px">
-<nz-table [nzData]="departamentos">
+<nz-table #tabla [nzData]="departamentos">
   <thead>
     <tr>
       <th>Código</th>
@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let departamento of departamentos">
+    <tr *ngFor="let departamento of tabla.data">
       <td> {{ departamento.iddepartamento }} </td>
       <td> {{ departamento.nombre }} </td>
       <td> {{ departamento.region }}</td>

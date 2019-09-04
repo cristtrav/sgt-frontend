@@ -10,6 +10,11 @@ import { NzNotificationService, NzModalService } from 'ng-zorro-antd';
 })
 export class VistaCiudadesComponent implements OnInit {
 
+  pageSize = 10;
+  pageIndex = 1;
+  totalCiudades = 20;
+  tableLoading = false;
+
   formCiudadVisible = false;
   ciudades: CiudadDTO[];
   ciudadEdit: CiudadDTO;
@@ -21,12 +26,27 @@ export class VistaCiudadesComponent implements OnInit {
 
   ngOnInit() {
     this.cargarCiudades();
+    this.cargarTotalCiudades();
+  }
+
+  private cargarTotalCiudades() {
+    this.ciudadesSrv.getTotal().subscribe((data) => {
+      this.totalCiudades = data;
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   cargarCiudades(): void {
-    this.ciudadesSrv.getData().subscribe((data) => {
+    this.tableLoading = true;
+    const limit = this.pageSize;
+    const offset = (this.pageIndex - 1) * this.pageSize;
+    this.ciudadesSrv.getData(limit, offset).subscribe((data) => {
       this.ciudades = data;
+      this.tableLoading = false;
+      this.cargarTotalCiudades();
     }, (error) => {
+      this.tableLoading = false;
       console.log(error);
       if (typeof error.error === 'string') {
         this.notification.create('error', 'Error al cargar ciudades', error.error);

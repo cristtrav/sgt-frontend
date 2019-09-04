@@ -6,7 +6,16 @@
   <app-form-ciudad (saved)="cargarCiudades()" [(formVisible)]="formCiudadVisible" [ciudadEdit]="ciudadEdit"></app-form-ciudad>
 </div>
 <div style="margin-top: 10px">
-  <nz-table [nzData]="ciudades">
+  <nz-table #tabla
+  nzFrontPagination="false"
+  [nzData]="ciudades"
+  [nzLoading]="tableLoading"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  [nzTotal]="totalCiudades"
+  (nzPageIndexChange)="cargarCiudades()"
+  (nzPageSizeChange)="cargarCiudades()"
+  nzShowSizeChanger >
     <thead>
       <tr>
         <th>Código</th>
@@ -16,7 +25,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let ciudad of ciudades">
+      <tr *ngFor="let ciudad of tabla.data">
         <td>{{ ciudad.idciudad }}</td>
         <td>{{ ciudad.nombre }}</td>
         <td>{{ ciudad.departamento }}</td>

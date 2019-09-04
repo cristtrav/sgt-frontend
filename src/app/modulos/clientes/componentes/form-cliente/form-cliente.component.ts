@@ -80,7 +80,7 @@ export class FormClienteComponent implements OnInit {
   }
 
   cargarCiudades() {
-    this.ciudadesSrv.getData().subscribe((data) => {
+    this.ciudadesSrv.getData(null, null).subscribe((data) => {
       this.ciudades = data;
     }, (error) => {
       console.log(error);
