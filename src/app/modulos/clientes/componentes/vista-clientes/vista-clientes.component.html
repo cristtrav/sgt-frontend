@@ -3,7 +3,11 @@
     <i nz-icon nzType="plus"></i>
     Agregar
   </button>
-  <nz-modal [nzVisible]="formVisible" [nzTitle]="titulo" [nzFooter]="pie" nzWrapClassName="vertical-center-modal" (nzOnCancel)="cerrarForm()" >
+  <nz-modal [nzVisible]="formVisible"
+  [nzTitle]="titulo"
+  [nzFooter]="pie"
+  nzWrapClassName="vertical-center-modal"
+  (nzOnCancel)="cerrarForm()" >
 
     <ng-template #titulo>
       <span *ngIf="formComponent.modoEditar == false" style="font-weight: bold">Nuevo Cliente</span>

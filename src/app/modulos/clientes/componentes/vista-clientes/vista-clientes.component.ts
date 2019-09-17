@@ -23,8 +23,8 @@ export class VistaClientesComponent implements OnInit {
   formComponent: FormClienteComponent;
 
   constructor(private clientesSrv: ClientesService,
-    private notification: NzNotificationService,
-    private modal: NzModalService) { }
+              private notification: NzNotificationService,
+              private modal: NzModalService) { }
 
   ngOnInit() {
     this.cargarClientes();

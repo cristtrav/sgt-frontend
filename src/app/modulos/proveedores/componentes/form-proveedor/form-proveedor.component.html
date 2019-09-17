@@ -1,0 +1,71 @@
+<form [formGroup]="form" nz-form>
+  <nz-form-item>
+    <nz-form-label [nzSm]="labelSize" nzRequired>Código</nz-form-label>
+    <nz-form-control [nzSm]="controlSize" nzErrorTip="Requerido. Límite: 999999.">
+      <nz-input-number [nzDisabled]="modoModificar" style="width: 10rem" formControlName="id" nzMin="0" nzMax="999999" nzPlaceHolder="ID">
+      </nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="labelSize" nzRequired>Razón Social</nz-form-label>
+    <nz-form-control [nzSm]="controlSize" nzErrorTip="Requerido. Lmite: 80 carácteres.">
+      <input formControlName="razonsocial" nz-input placeholder="Ej.: Diprocar S.A." />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="labelSize" nzRequired>RUC</nz-form-label>
+    <nz-form-control [nzSm]="controlSize" nzErrorTip="Ingrese número de documento y dígito verificador (1-9)">
+      <nz-input-group nzCompact>
+        <nz-input-number formControlName="ci" nzPlaceHolder="Ej.: 5123456" [nzMin]="0" style="width: 80%">
+        </nz-input-number>
+        <nz-input-number formControlName="dvruc" nzPlaceHolder="Ej.: 9" [nzMin]="0" [nzMax]="9" style="width: 20%">
+        </nz-input-number>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="labelSize">Teléfono</nz-form-label>
+    <nz-form-control [nzSm]="controlSize">
+      <input formControlName="telefono" nz-input type="text" placeholder="Ej.: 0981666555" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="labelSize">Email</nz-form-label>
+    <nz-form-control [nzSm]="controlSize" nzErrorTip="Dirección inválida">
+      <input formControlName="email" nz-input type="text" placeholder="dir@mail.com" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="labelSize">Contacto</nz-form-label>
+    <nz-form-control [nzSm]="controlSize">
+      <nz-input-group nzCompact>
+        <input formControlName="nombrecontacto" nz-input type="text" placeholder="Nombre" style="width: 65%" />
+        <input formControlName="telefonocontacto" nz-input type="text" placeholder="Teléfono" style="width: 35%" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <div nz-row nzGutter="8">
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label nzSpan="10" nzRequired>Ingreso</nz-form-label>
+        <nz-form-control nzSpan="14" nzErrorTip="Ingrese una fecha">
+          <nz-date-picker nzPlaceHolder="Fecha" formControlName="fechaingreso" nzFormat="dd/MM/yyyy"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col nzSpan="11">
+      <nz-form-item>
+        <nz-form-label nzSpan="7" nzRequired>Estado</nz-form-label>
+        <nz-form-control nzSpan="17" nzErrorTip="Seleccione un estado">
+          <nz-select formControlName="activo" nzPlaceHolder="Seleccionar...">
+            <nz-option nzValue="1" nzLabel="Activo"></nz-option>
+            <nz-option nzValue="0" nzLabel="Inactivo"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+</form>
+<nz-alert *ngIf="msgVisible" (nzOnClose)="hideMsg()" [nzType]="msgType" [nzMessage]="msg" [nzDescription]="msgDescription" nzShowIcon nzCloseable ></nz-alert>

@@ -1,0 +1,65 @@
+<div>
+  <button nz-button nzType="primary" (click)="nuevoProveedor()">
+    <i nz-icon nzType="plus"></i>
+    Agregar
+  </button>
+  <nz-modal [nzVisible]="formVisible" [nzTitle]="titulo" [nzFooter]="pie" nzWidth="620" (nzOnCancel)="cerrarForm()"
+    nzWrapClassName="vertical-center-modal">
+    <ng-template #titulo>
+      <span *ngIf="formProveedor.modoModificar == false" style="font-weight: bold">Nuevo Proveedor</span>
+      <span *ngIf="formProveedor.modoModificar" style="font-weight: bold">Editar Proveedor</span>
+    </ng-template>
+    <app-form-proveedor (saved)="cargarProveedores()"></app-form-proveedor>
+    <ng-template #pie>
+      <button nz-button nzType="default" (click)="cerrarForm()">Cerrar</button>
+      <button nz-button nzType="primary" (click)="guardarProveedor()">
+        <i nz-icon nzType="save"></i>
+        Guardar
+      </button>
+    </ng-template>
+  </nz-modal>
+</div>
+<div style="margin-top: 10px;">
+  <nz-table #tabla [nzData]="proveedores">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Razón Social</th>
+        <th>RUC</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+        <th>Contacto</th>
+        <th>Fecha Ingreso</th>
+        <th>Activo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proveedor of tabla.data">
+        <td>{{ proveedor.idproveedor }}</td>
+        <td>{{ proveedor.razonsocial }}</td>
+        <td>{{ proveedor.documento }}<span *ngIf="proveedor.dvRuc">-</span>{{ proveedor.dvRuc }}</td>
+        <td>{{ proveedor.telefono }}</td>
+        <td>{{ proveedor.email }}</td>
+        <td>{{ proveedor.contacto }}
+          <span *ngIf="proveedor.contacto">(</span>
+          {{ proveedor.telefonoContacto }}
+          <span *ngIf="proveedor.contacto">)</span>
+        </td>
+        <td>{{ formatDate(proveedor.fechaIngreso) }}</td>
+        <td>
+            <i *ngIf="proveedor.activo" nz-icon style="font-size: 20px" [nzType]="'check-circle'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'"></i>
+            <i *ngIf="proveedor.activo == false" nz-icon style="font-size: 20px" [nzType]="'close-circle'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#f44336'"></i>
+        </td>
+        <td>
+          <button nz-button nzType="primary" (click)="editarProveedor(proveedor)" nzGhost>
+            <i nz-icon nzType="edit"></i>
+          </button>
+          <button style="margin-left: 5px" nz-button nzType="danger" (click)="confirmarEliminacion(proveedor)" nzGhost>
+            <i nz-icon nzType="delete"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

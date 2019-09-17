@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: 'regiones', loadChildren: () => import('./modulos/regiones/regiones.module').then(m => m.RegionesModule) },
   { path: 'departamentos', loadChildren: () => import('./modulos/departamentos/departamentos.module').then(m => m.DepartamentosModule) },
   { path: 'ciudades', loadChildren: () => import('./modulos/ciudades/ciudades.module').then(m => m.CiudadesModule) },
-  { path: 'clientes', loadChildren: () => import('./modulos/clientes/clientes.module').then(m => m.ClientesModule) }
+  { path: 'clientes', loadChildren: () => import('./modulos/clientes/clientes.module').then(m => m.ClientesModule) },
+  { path: 'proveedores', loadChildren: () => import('./modulos/proveedores/proveedores.module').then(m => m.ProveedoresModule) }
 ];
 
 @NgModule({
