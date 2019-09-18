@@ -22,7 +22,7 @@
     <nz-form-item>
         <nz-form-label [nzSm]="6" nzFor="iddepartamento" nzRequired>Departamento</nz-form-label>
         <nz-form-control [nzSm]="17" nzErrorTip="Campo requerido. Seleccione un departamento">
-          <nz-select name="iddepartamento" nzPlaceHolder="Seleccionar..." formControlName="iddepartamento" nzAllowClear>
+          <nz-select name="iddepartamento" nzPlaceHolder="Seleccionar..." formControlName="iddepartamento" nzShowSearch nzAllowClear>
             <nz-option *ngFor="let departamento of departamentos" [nzLabel]="departamento.nombre" [nzValue]="departamento.iddepartamento" ></nz-option>
           </nz-select>
         </nz-form-control>

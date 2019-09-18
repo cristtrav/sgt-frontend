@@ -1,0 +1,37 @@
+<form nz-form [formGroup]="form">
+  <nz-form-item>
+    <nz-form-label nzSpan="4" nzRequired>Código</nz-form-label>
+    <nz-form-control nzSpan="19" nzErrorTip="Ingrese un código.">
+      <nz-input-number [nzDisabled]="modoModificar" formControlName="id" style="width: 10rem" nzPlaceHolder="ID" nzMin="0"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="4" nzRequired>Nombre</nz-form-label>
+    <nz-form-control nzSpan="19" nzErrorTip="Ingrese un nombre. Máximo 20 carácteres.">
+      <input formControlName="nombre" nz-input placeholder="Ej.: Corolla" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="4" nzRequired>Marca</nz-form-label>
+    <nz-form-control nzSpan="19" nzErrorTip="Seleccione una marca.">
+      <nz-select formControlName="idmarca" nzPlaceHolder="Seleccionar..." nzShowSearch nzAllowClear>
+        <nz-option *ngFor="let marca of marcas" [nzLabel]="marca.nombre" [nzValue]="marca.idmarca"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="4">Año</nz-form-label>
+    <nz-form-control nzSpan="19">
+      <nz-input-number formControlName="anio" style="width: 100%" nzPlaceHolder="Ej.: 2010" nzMin="1920" [nzMax]="maxAnio"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<nz-alert
+*ngIf="msgVisible"
+[nzMessage]="msg"
+[nzDescription]="msgDescription"
+[nzType]="msgType"
+(nzOnClose)="handleCloseMsg()"
+nzCloseable
+nzShowIcon>
+</nz-alert>

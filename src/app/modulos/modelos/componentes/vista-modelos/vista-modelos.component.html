@@ -1,0 +1,56 @@
+<div>
+  <button nz-button nzType="primary" (click)="nuevoModelo()">
+    <i nz-icon nzType="plus"></i>
+    Agregar
+  </button>
+  <nz-modal [nzTitle]="titulo" [nzFooter]="pie" [nzVisible]="modalFormVisible" nzWrapClassName="vertical-center-modal"
+    (nzOnCancel)="cerrarModal()">
+
+    <ng-template #titulo>
+      <span style="font-weight: bold" *ngIf="formModelo.modoModificar == false">Nuevo Modelo</span>
+      <span style="font-weight: bold" *ngIf="formModelo.modoModificar">Editar Modelo</span>
+    </ng-template>
+
+    <app-form-modelo (saved)="cargarModelos()"></app-form-modelo>
+
+    <ng-template #pie>
+      <button nz-button nzType="default" (click)="cerrarModal()">
+        Cerrar
+      </button>
+      <button nz-button nzType="primary" (click)="guardarModelo()">
+        <i nz-icon nzType="save"></i>
+        Guardar
+      </button>
+    </ng-template>
+  </nz-modal>
+
+</div>
+<div style="margin-top: 10px">
+  <nz-table [nzData]="modelos" #tabla>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Marca</th>
+        <th>Año</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let modelo of tabla.data">
+        <td>{{ modelo.idmodelo }}</td>
+        <td>{{ modelo.nombre }}</td>
+        <td>{{ modelo.marca }}</td>
+        <td>{{ modelo.anio }}</td>
+        <td>
+          <button nz-button nzType="primary" (click)="editarModelo(modelo)" nzGhost>
+            <i nz-icon nzType="edit"></i>
+          </button>
+          <button style="margin-left: 5px" nz-button nzType="danger" (click)="confirmarEliminacion(modelo)" nzGhost>
+            <i nz-icon nzType="delete"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

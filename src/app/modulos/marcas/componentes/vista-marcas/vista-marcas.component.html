@@ -3,17 +3,15 @@
     <i nz-icon nzType="plus"></i>
     Agregar
   </button>
-  <nz-modal [nzVisible]="formVisible"
-  [nzFooter]="pie" [nzTitle]="titulo"
-  (nzOnCancel)="cerrarForm()"
-  nzWrapClassName="vertical-center-modal">
+  <nz-modal [nzVisible]="formVisible" [nzFooter]="pie" [nzTitle]="titulo" (nzOnCancel)="cerrarForm()"
+    nzWrapClassName="vertical-center-modal">
     <ng-template #titulo>
       <span *ngIf="formMarca.modoModificar == false" style="font-weight: bold">Nueva Marca</span>
       <span *ngIf="formMarca.modoModificar" style="font-weight: bold">Editar Marca</span>
     </ng-template>
     <app-form-marca (saved)="cargarMarcas()"></app-form-marca>
     <ng-template #pie>
-      <button nz-button nzType="default" (click)="cerrarForm()">Cancelar</button>
+      <button nz-button nzType="default" (click)="cerrarForm()">Cerrar</button>
       <button nz-button nzType="primary" (click)="guardarMarca()">
         <i nz-icon nzType="save"></i>
         Guardar
@@ -36,12 +34,12 @@
         <td>{{ marca.idmarca }}</td>
         <td>{{ marca.nombre }}</td>
         <td>
-            <button nz-button nzType="primary" (click)="editarMarca(marca)" nzGhost>
-                <i nz-icon nzType="edit"></i>
-              </button>
-              <button style="margin-left: 5px" nz-button nzType="danger" (click)="confirmarEliminacion(marca)" nzGhost>
-                <i nz-icon nzType="delete"></i>
-              </button>
+          <button nz-button nzType="primary" (click)="editarMarca(marca)" nzGhost>
+            <i nz-icon nzType="edit"></i>
+          </button>
+          <button style="margin-left: 5px" nz-button nzType="danger" (click)="confirmarEliminacion(marca)" nzGhost>
+            <i nz-icon nzType="delete"></i>
+          </button>
         </td>
       </tr>
     </tbody>
