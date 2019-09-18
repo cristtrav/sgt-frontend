@@ -26,9 +26,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let ciudad of tabla.data">
-        <td>{{ ciudad.idciudad }}</td>
+        <td>{{ toCodigoRef(ciudad) }}</td>
         <td>{{ ciudad.nombre }}</td>
-        <td>{{ ciudad.departamento }}</td>
+        <td>{{ ciudad.iddepartamento.toString().padStart(2, '0') }} - {{ ciudad.departamento }}</td>
         <td>
             <button nz-button nzType="primary" nzGhost (click)="editarCiudad(ciudad)">
                 <i nz-icon nzType="edit"></i>

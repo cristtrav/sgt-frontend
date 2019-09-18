@@ -64,9 +64,17 @@ export class FormCiudadComponent implements OnInit {
     this.form = this.formBuilder.group({
       idciudad: [null, [Validators.required]],
       nombre: [null, [Validators.required, Validators.maxLength(45)]],
-      iddepartamento: [null, [Validators.required]]
+      iddepartamento: [null, [Validators.required]],
+      iddep: [null, [Validators.required]]
     });
     this.cargarDepartamentos();
+    this.onFormChanges();
+  }
+
+  private onFormChanges() {
+    this.form.get('iddepartamento').valueChanges.subscribe((val) => {
+      this.form.get('iddep').setValue(val);
+    });
   }
 
   cerrarForm() {

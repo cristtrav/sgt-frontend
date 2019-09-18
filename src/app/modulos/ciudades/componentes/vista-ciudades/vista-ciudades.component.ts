@@ -70,12 +70,14 @@ export class VistaCiudadesComponent implements OnInit {
   confirmarEliminacion(ciudad: CiudadDTO) {
     this.modal.confirm({
       nzTitle: '<i>¿Desea eliminar la ciudad?</i>',
-      nzContent: '<b>' + ciudad.idciudad + ' - ' + ciudad.nombre + '</b>',
+      nzContent: `<b> ${ciudad.idciudad.toString().padStart(2, '0')}${ciudad.iddepartamento.toString().padStart(2, '0')}
+      - ${ciudad.nombre} (${ciudad.departamento}) </b>`,
       nzOkType: 'danger',
       nzOkText: 'Eliminar',
       nzWrapClassName: 'vertical-center-modal',
       nzOnOk: () => {
         this.ciudadesSrv.deleteData(ciudad).subscribe(() => {
+          this.pageIndex = 1;
           this.cargarCiudades();
           this.notification.create('success', 'Ciudad eliminada', '');
         }, error => {
@@ -88,5 +90,11 @@ export class VistaCiudadesComponent implements OnInit {
         });
       }
     });
+  }
+
+  toCodigoRef(ciudad: CiudadDTO): string {
+    const codDep = ciudad.iddepartamento.toString().padStart(2, '0');
+    const nroCiu = ciudad.idciudad.toString().padStart(2, '0');
+    return `${codDep}${nroCiu}`;
   }
 }

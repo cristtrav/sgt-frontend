@@ -1,14 +1,32 @@
-<nz-modal [nzWidth]="550" [(nzVisible)]="formVisible" [nzTitle]="titulo" [nzFooter]="pie" nzWrapClassName="vertical-center-modal"
-  (nzOnCancel)="cerrarForm()" (nzAfterOpen)="cargarDepartamentos()">
+<nz-modal [nzWidth]="550" [(nzVisible)]="formVisible" [nzTitle]="titulo" [nzFooter]="pie"
+  nzWrapClassName="vertical-center-modal" (nzOnCancel)="cerrarForm()" (nzAfterOpen)="cargarDepartamentos()">
   <ng-template #titulo>
     <span style="font-weight: bold;">{{ tituloForm }}</span>
   </ng-template>
 
   <form [formGroup]="form" nz-form>
+
     <nz-form-item>
-      <nz-form-label [nzSm]="6" nzFor="idciudad" nzRequired >Código</nz-form-label>
+      <nz-form-label [nzSm]="6" nzFor="iddepartamento" nzRequired>Departamento</nz-form-label>
+      <nz-form-control [nzSm]="17" nzErrorTip="Campo requerido. Seleccione un departamento">
+        <nz-select [nzDisabled]="modoEditar" name="iddepartamento" nzPlaceHolder="Seleccionar..." formControlName="iddepartamento" nzShowSearch
+          nzAllowClear>
+          <nz-option *ngFor="let departamento of departamentos" [nzLabel]="departamento.nombre"
+            [nzValue]="departamento.iddepartamento"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" nzRequired>Código</nz-form-label>
       <nz-form-control [nzSm]="17" nzErrorTip="Campo requerido. Ingrese un valor entre 0 y 99">
-        <nz-input-number [nzDisabled]="modoEditar" name="idciudad" nzPlaceHolder="ID" nzMin="0" nzMax="99" formControlName="idciudad"></nz-input-number>
+        <nz-input-group nzCompact>
+          <nz-input-number nzDisabled="true" nzPlaceHolder="Cod. Dep." nzMin="0" nzMax="99"
+            formControlName="iddep" style="width: 50%"></nz-input-number>
+          <nz-input-number [nzDisabled]="modoEditar" nzPlaceHolder="Nro. Ciudad" nzMin="0" nzMax="99"
+            formControlName="idciudad" style="width: 50%"></nz-input-number>
+        </nz-input-group>
+
       </nz-form-control>
     </nz-form-item>
 
@@ -19,23 +37,17 @@
       </nz-form-control>
     </nz-form-item>
 
-    <nz-form-item>
-        <nz-form-label [nzSm]="6" nzFor="iddepartamento" nzRequired>Departamento</nz-form-label>
-        <nz-form-control [nzSm]="17" nzErrorTip="Campo requerido. Seleccione un departamento">
-          <nz-select name="iddepartamento" nzPlaceHolder="Seleccionar..." formControlName="iddepartamento" nzShowSearch nzAllowClear>
-            <nz-option *ngFor="let departamento of departamentos" [nzLabel]="departamento.nombre" [nzValue]="departamento.iddepartamento" ></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
+
   </form>
 
-  <nz-alert (nzOnClose)="onCloseMsg()" *ngIf="msgVisible" [nzType]="tipoMsg" [nzMessage]="msg" [nzDescription]="msgDescripcion" nzCloseable="true" nzShowIcon></nz-alert>
+  <nz-alert (nzOnClose)="onCloseMsg()" *ngIf="msgVisible" [nzType]="tipoMsg" [nzMessage]="msg"
+    [nzDescription]="msgDescripcion" nzCloseable="true" nzShowIcon></nz-alert>
 
   <ng-template #pie>
     <button nz-button nzType="default" (click)="cerrarForm()">Cerrar</button>
     <button nz-button nzType="primary" (click)="guardar()">
-        <i nz-icon nzType="save"></i>
-        Guardar
-      </button>
+      <i nz-icon nzType="save"></i>
+      Guardar
+    </button>
   </ng-template>
 </nz-modal>

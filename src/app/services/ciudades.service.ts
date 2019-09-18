@@ -44,11 +44,11 @@ export class CiudadesService {
         'Content-Type': 'application/json; charset=utf-8'
       })
     };
-    return this.http.put<CiudadDTO>(`${this.url}/${ciudad.idciudad}`, ciudad, httpOptions);
+    return this.http.put<CiudadDTO>(`${this.url}`, ciudad, httpOptions);
   }
 
   deleteData(ciudad: CiudadDTO): Observable<any> {
-    return this.http.delete<CiudadDTO>(`${this.url}/${ciudad.idciudad}`);
+    return this.http.delete<CiudadDTO>(`${this.url}?idciudad=${ciudad.idciudad}&iddepartamento=${ciudad.iddepartamento}`);
   }
 
   getTotal(): Observable<any> {
