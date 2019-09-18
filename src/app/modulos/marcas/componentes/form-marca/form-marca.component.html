@@ -1,0 +1,23 @@
+<form [formGroup]="form" nz-form>
+  <nz-form-item>
+    <nz-form-label nzSpan="4" nzRequired>Código</nz-form-label>
+    <nz-form-control nzSpan="19" nzErrorTip="Ingrese un código.">
+      <nz-input-number nzMin="0" [nzDisabled]="modoModificar" formControlName="id" nzPlaceHolder="ID"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="4" nzRequired>Nombre</nz-form-label>
+    <nz-form-control nzSpan="19" nzErrorTip="Ingrese un nombre. Máximo 30 carácteres.">
+      <input formControlName="nombre" nz-input placeholder="Ej.: Toyota" />
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<nz-alert *ngIf="msgVisible"
+[nzType]="msgType"
+[nzMessage]="msg"
+[nzDescription]="msgDescription"
+(nzOnClose)="handleHideMsg()"
+nzShowIcon
+nzCloseable>
+</nz-alert>

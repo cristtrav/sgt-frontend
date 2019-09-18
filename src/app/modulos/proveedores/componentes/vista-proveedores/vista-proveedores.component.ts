@@ -40,6 +40,7 @@ export class VistaProveedoresComponent implements OnInit {
   }
 
   nuevoProveedor(): void {
+    this.formProveedor.nuevo();
     this.formVisible = true;
   }
 

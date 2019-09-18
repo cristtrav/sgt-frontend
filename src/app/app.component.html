@@ -6,7 +6,7 @@
             [(nzCollapsed)]="isCollapsed"
             [nzTrigger]="null">
     <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
+      <a href="#">
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
         <h1>SGT</h1>
       </a>
@@ -19,7 +19,7 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Ubicaciones" nzIcon="environment">
+      <li nz-submenu nzTitle="Ubicaciones" nzIcon="environment">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/regiones">Regiones</a>
@@ -32,13 +32,26 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Personas" nzIcon="user">
+      <li nz-submenu nzTitle="Personas" nzIcon="user">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/clientes">Clientes</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/proveedores">Proveedores</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Vehículos" nzIcon="car">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/marcas">Marcas</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/modelos">Modelos</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/vehiculos">Vehículos</a>
           </li>
         </ul>
       </li>

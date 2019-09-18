@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RegionDTO } from '../dto/RegionDTO';
 import { Observable } from 'rxjs';
+import { AppSettings } from './../util/AppSettings';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegionesService {
 
-  url = 'http://localhost:3000/api/regiones';
+  url = `${AppSettings.urlAPI}/regiones`;
 
   constructor(private http: HttpClient) { }
 

@@ -151,4 +151,10 @@ export class FormProveedorComponent implements OnInit {
     this.modoModificar = true;
   }
 
+  nuevo() {
+    this.modoModificar = false;
+    this.msgVisible = false;
+    this.form.reset();
+  }
+
 }

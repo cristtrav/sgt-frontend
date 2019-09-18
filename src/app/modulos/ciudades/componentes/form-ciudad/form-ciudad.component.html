@@ -7,8 +7,8 @@
   <form [formGroup]="form" nz-form>
     <nz-form-item>
       <nz-form-label [nzSm]="6" nzFor="idciudad" nzRequired >Código</nz-form-label>
-      <nz-form-control [nzSm]="17" nzErrorTip="Campo requerido. Ingrese un valor entre 1 y 9999">
-        <nz-input-number [nzDisabled]="modoEditar" name="idciudad" nzPlaceHolder="ID" nzMin="1" nzMax="9999" formControlName="idciudad"></nz-input-number>
+      <nz-form-control [nzSm]="17" nzErrorTip="Campo requerido. Ingrese un valor entre 0 y 99">
+        <nz-input-number [nzDisabled]="modoEditar" name="idciudad" nzPlaceHolder="ID" nzMin="0" nzMax="99" formControlName="idciudad"></nz-input-number>
       </nz-form-control>
     </nz-form-item>
 

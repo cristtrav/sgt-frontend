@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DepartamentoDTO } from '../dto/DepartamentoDTO';
 import { Observable } from 'rxjs';
+import { AppSettings } from './../util/AppSettings';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DepartamentosService {
 
-  url = 'http://localhost:3000/api/departamentos';
+  url = `${AppSettings.urlAPI}/departamentos`;
 
   constructor(private http: HttpClient) { }
 

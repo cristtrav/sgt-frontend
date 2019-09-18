@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProveedorDTO } from './../dto/ProveedorDTO';
 import { Observable } from 'rxjs';
+import { AppSettings } from './../util/AppSettings';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProveedoresService {
 
-  url = 'http://localhost:3000/api/proveedores';
+  url = `${AppSettings.urlAPI}/proveedores`;
 
   httpOptions = {
     headers: new HttpHeaders({

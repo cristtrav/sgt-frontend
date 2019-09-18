@@ -7,8 +7,8 @@
   <form nz-form [formGroup]="form">
     <nz-form-item>
       <nz-form-label [nzSm]="4" nzFor="idregion" nzRequired>Código</nz-form-label>
-      <nz-form-control [nzSm]="19" nzErrorTip="Requerido. Permitido: 1 al 9.">
-        <nz-input-number [nzDisabled]="modoEditar" [nzMin]="1" [nzMax]="9" formControlName="idregion"
+      <nz-form-control [nzSm]="19" nzErrorTip="Requerido. Permitido: 0 al 9.">
+        <nz-input-number [nzDisabled]="modoEditar" [nzMin]="0" [nzMax]="9" formControlName="idregion"
           [nzPlaceHolder]="'ID'"></nz-input-number>
       </nz-form-control>
     </nz-form-item>
