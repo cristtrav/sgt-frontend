@@ -1,0 +1,61 @@
+<form [formGroup]="form" nz-form>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired>Código</nz-form-label>
+    <nz-form-control nzSpan="18" nzErrorTip="Ingrese el código.">
+      <nz-input-number formControlName="id" nzPlaceHolder="ID" nzMin="0" style="width: 10rem"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired>Nombres</nz-form-label>
+    <nz-form-control nzSpan="18" nzErrorTip="Requerido. Máximo 45 carácteres.">
+      <input nz-input formControlName="nombres" placeholder="Ej.: Ana" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired>Apellidos</nz-form-label>
+    <nz-form-control nzSpan="18" nzErrorTip="Requerido. Máximo 45 carácteres.">
+      <input nz-input formControlName="apellidos" placeholder="Ej.: Diaz" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired>C.I.</nz-form-label>
+    <nz-form-control nzSpan="18" nzErrorTip="Ingrese el documento de identidad.">
+      <nz-input-number formControlName="ci" style="width: 100%" nzMin="0" nzPlaceHolder="Ej.:2536981"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired>Cargo</nz-form-label>
+    <nz-form-control nzSpan="18" nzErrorTip="Seleccione un cargo.">
+      <nz-select nzPlaceHolder="Seleccionar..." formControlName="idcargo" (nzOpenChange)="cargarCargos()">
+        <nz-option *ngFor="let cargo of cargos" [nzLabel]="cargo.nombre" [nzValue]="cargo.idcargo"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5">Teléfono</nz-form-label>
+    <nz-form-control nzSpan="18">
+      <input nz-input placeholder="Ej.: 0976452398" formControlName="telefono" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" [nzRequired]="pwdRequired">Contraseña</nz-form-label>
+    <nz-form-control nzSpan="18" [nzErrorTip]="msgValidacionPwd" [nzValidateStatus]="pwdValidateStatus" >
+      <nz-input-group>
+        <div nz-col nzSpan="12">
+            <input nz-input type="password" placeholder="Contraseña" formControlName="pwd" />
+        </div>
+        <div nz-col nzSpan="12">
+            <input nz-input type="password" placeholder="Confirmar contraseña" formControlName="pwdConf" />
+        </div>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzOffset]="5" [nzSpan]="18">
+      <nz-input-group>
+          <label nz-checkbox formControlName="activo">Activo</label>
+          <label nz-checkbox formControlName="accesosistema">Acceso al sistema</label>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+</form>

@@ -43,7 +43,11 @@ export class FormClienteComponent implements OnInit {
       this.form.get('ci').setValue(cliente.ci);
       this.form.get('nombres').setValue(cliente.nombres);
       this.form.get('apellidos').setValue(cliente.apellidos);
-      this.form.get('idciudad').setValue(cliente.idciudad);
+
+      const coddep = cliente.iddepartamento.toString().padStart(2, '0');
+      const nrociu = cliente.idciudad.toString().padStart(2, '0');
+
+      this.form.get('idciudad').setValue(`${coddep}${nrociu}`);
       this.form.get('dvruc').setValue(cliente.dvRuc);
       this.form.get('telefono').setValue(cliente.telefono);
       const fi = cliente.fechaIngreso;
@@ -103,7 +107,11 @@ export class FormClienteComponent implements OnInit {
       if (tel != null) {
         cliente.telefono = tel;
       }
-      cliente.idciudad = this.form.get('idciudad').value;
+      const codRefCiu: string = this.form.get('idciudad').value;
+      const strCodDep: string = codRefCiu.substring(0, 2);
+      const strNroCiu: string = codRefCiu.substring(2, 4);
+      cliente.idciudad = parseInt(strNroCiu);
+      cliente.iddepartamento = parseInt(strCodDep);
       const fi: Date = this.form.get('fechaingreso').value;
       if (fi != null) {
         //  let fechaFormateada = fi.getFullYear().toString();
@@ -175,6 +183,12 @@ export class FormClienteComponent implements OnInit {
 
   onMsgClose() {
     this.msgVisible = false;
+  }
+
+  getCodRefCiudad(ciudad: CiudadDTO): string {
+    const coddep = ciudad.iddepartamento.toString().padStart(2, '0');
+    const nrociu = ciudad.idciudad.toString().padStart(2, '0');
+    return `${coddep}${nrociu}`;
   }
 
 }

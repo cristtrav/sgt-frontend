@@ -25,7 +25,7 @@
     <nz-form-label [nzSm]="labelSize" nzRequired>Ciudad</nz-form-label>
     <nz-form-control [nzSm]="controlSize" nzErrorTip="Requerido. Seleccione una ciudad">
       <nz-select nzPlaceHolder="Seleccionar..." formControlName="idciudad" nzShowSearch nzAllowClear>
-        <nz-option *ngFor="let ciudad of ciudades" [nzLabel]="ciudad.nombre+' ('+ciudad.departamento+')'" [nzValue]="ciudad.idciudad"></nz-option>
+        <nz-option *ngFor="let ciudad of ciudades" [nzLabel]="ciudad.nombre+' ('+ciudad.departamento+')'" [nzValue]="getCodRefCiudad(ciudad)"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
@@ -55,4 +55,4 @@
 
 </form>
 
-<nz-alert *ngIf="msgVisible" [nzType]="tipoMsg" [nzMessage]="msg" [nzDescription]="descripcionMsg" nzShowIcon nzCloseable></nz-alert>
+<nz-alert *ngIf="msgVisible" (nzOnClose)="onMsgClose()" [nzType]="tipoMsg" [nzMessage]="msg" [nzDescription]="descripcionMsg" nzShowIcon nzCloseable></nz-alert>

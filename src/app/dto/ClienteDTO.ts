@@ -6,7 +6,7 @@ export class ClienteDTO {
   dvRuc: number;
   idciudad: number;
   ciudad: string;
-  iddpartamento: number;
+  iddepartamento: number;
   departamento: string;
   fechaIngreso: Date;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormClienteComponent } from '../form-cliente/form-cliente.component';
 import { ClienteDTO } from './../../../../dto/ClienteDTO';
+import { CiudadDTO } from './../../../../dto/CiudadDTO';
 import { ClientesService } from './../../../../services/clientes.service';
 import { NzNotificationService, NzModalService } from 'ng-zorro-antd';
 
@@ -113,5 +114,11 @@ export class VistaClientesComponent implements OnInit {
         });
       }
     });
+  }
+
+  getCodRefCiudad(ciudad: CiudadDTO): string {
+    const coddep = ciudad.iddepartamento.toString().padStart(2, '0');
+    const nrociu = ciudad.idciudad.toString().padStart(2, '0');
+    return `${coddep}${nrociu}`;
   }
 }

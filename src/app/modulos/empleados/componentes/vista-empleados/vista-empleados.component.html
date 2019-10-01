@@ -1,0 +1,26 @@
+<div>
+  <button nz-button nzType="primary" (click)="nuevoEmpleado()">
+    <i nz-icon nzType="plus"></i>
+    Agregar
+  </button>
+  <nz-modal
+  nzWidth="600"
+  nzWrapClassName="vertical-center-modal"
+  [nzVisible]="modalFormVisible"
+  [nzTitle]="titulo"
+  [nzFooter]="pie"
+  (nzOnCancel)="cerrarModalForm()">
+    <ng-template #titulo>
+      <span *ngIf="formEmpleadoComponent.modoModificar == false" style="font-weight: bold">Nuevo Empleado</span>
+      <span *ngIf="formEmpleadoComponent.modoModificar" style="font-weight: bold">Editar Empleado</span>
+    </ng-template>
+    <app-form-empleado></app-form-empleado>
+    <ng-template #pie>
+      <button nz-button nzType="default" (click)="cerrarModalForm()">Cerrar</button>
+      <button nz-button nzType="primary" (click)="guardarEmpleado()">
+        <i nz-icon nzType="save"></i>
+        Guardar
+      </button>
+    </ng-template>
+  </nz-modal>
+</div>
