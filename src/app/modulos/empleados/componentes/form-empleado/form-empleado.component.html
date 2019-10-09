@@ -2,7 +2,7 @@
   <nz-form-item>
     <nz-form-label nzSpan="5" nzRequired>Código</nz-form-label>
     <nz-form-control nzSpan="18" nzErrorTip="Ingrese el código.">
-      <nz-input-number formControlName="id" nzPlaceHolder="ID" nzMin="0" style="width: 10rem"></nz-input-number>
+      <nz-input-number [nzDisabled]="modoModificar" formControlName="id" nzPlaceHolder="ID" nzMin="0" style="width: 10rem"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
@@ -42,7 +42,7 @@
     <nz-form-control nzSpan="18" [nzErrorTip]="msgValidacionPwd" [nzValidateStatus]="pwdValidateStatus" >
       <nz-input-group>
         <div nz-col nzSpan="12">
-            <input nz-input type="password" placeholder="Contraseña" formControlName="pwd" />
+            <input nz-input type="password" [placeholder]="placeholderPwd" formControlName="pwd" />
         </div>
         <div nz-col nzSpan="12">
             <input nz-input type="password" placeholder="Confirmar contraseña" formControlName="pwdConf" />
@@ -59,3 +59,4 @@
     </nz-form-control>
   </nz-form-item>
 </form>
+<nz-alert *ngIf="msgVisible" [nzMessage]="msg" [nzDescription]="msgDescription" [nzType]="msgType" (nzOnClose)="handleAlertClose()" nzCloseable nzShowIcon ></nz-alert>

@@ -22,4 +22,16 @@ export class FuncionariosService {
   postData(funcionario: FuncionarioDTO): Observable<any> {
     return this.http.post(this.url, funcionario, this.httpOptions);
   }
+
+  getData(): Observable<FuncionarioDTO[]> {
+    return this.http.get<FuncionarioDTO[]>(this.url);
+  }
+
+  putData(funcionario: FuncionarioDTO): Observable<any> {
+    return this.http.put(this.url, funcionario, this.httpOptions);
+  }
+
+  deleteData(funcionario: FuncionarioDTO) {
+    return this.http.delete(`${this.url}/${funcionario.idfuncionario}`);
+  }
 }
