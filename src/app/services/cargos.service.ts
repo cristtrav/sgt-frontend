@@ -23,4 +23,16 @@ export class CargosService {
     return this.http.get<CargoDTO[]>(this.url);
   }
 
+  postData(cargo: CargoDTO): Observable<any> {
+    return this.http.post<CargoDTO>(this.url, cargo, this.httpOptions);
+  }
+
+  deleteData(cargo: CargoDTO): Observable<any> {
+    return this.http.delete(`${this.url}/${cargo.idcargo}`);
+  }
+
+  putData(cargo: CargoDTO): Observable<any> {
+    return this.http.put<CargoDTO>(this.url, cargo, this.httpOptions);
+  }
+
 }
