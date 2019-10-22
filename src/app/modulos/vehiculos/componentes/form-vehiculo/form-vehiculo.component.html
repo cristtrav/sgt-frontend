@@ -2,33 +2,49 @@
   <nz-form-item>
     <nz-form-label nzSpan="6" nzRequired>Código</nz-form-label>
     <nz-form-control nzSpan="17" nzErrorTip="Ingrese un código.">
-      <nz-input-number nzPlaceHolder="ID" formControlName="id"></nz-input-number>
+      <nz-input-number [nzDisabled]="modoModificar" nzPlaceHolder="ID" formControlName="id"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-label nzSpan="6" nzRequired>Propietario</nz-form-label>
     <nz-form-control nzSpan="17" nzErrorTip="Seleccione un propietario.">
-      <nz-select formControlName="cipropietario" nzPlaceHolder="Seleccionar..." (nzOpenChange)="cargarClientes()" nzAllowClear nzShowSearch>
-        <nz-option *ngFor="let cliente of clientes" [nzValue]="cliente.ci" [nzLabel]="cliente.nombres+ ' ' +cliente.apellidos"></nz-option>
+      <nz-select formControlName="cipropietario" nzPlaceHolder="Seleccionar..." (nzOpenChange)="cargarClientes()"
+        nzAllowClear nzShowSearch>
+        <nz-option *ngFor="let cliente of clientes" [nzValue]="cliente.ci"
+          [nzLabel]="cliente.nombres+ ' ' +cliente.apellidos"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-label nzSpan="6" nzRequired>Marca</nz-form-label>
     <nz-form-control nzSpan="17" nzErrorTip="Seleccione una marca">
-      <nz-select formControlName="idmarca" nzPlaceHolder="Seleccionar..." (nzOpenChange)='cargarMarcas()' nzAllowClear nzShowSearch>
+      <nz-select formControlName="idmarca" nzPlaceHolder="Seleccionar..." (nzOpenChange)='cargarMarcas()' nzAllowClear
+        nzShowSearch>
         <nz-option *ngFor="let marca of marcas" [nzValue]="marca.idmarca" [nzLabel]="marca.nombre"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
-  <nz-form-item>
-    <nz-form-label nzSpan="6" nzRequired>Modelo</nz-form-label>
-    <nz-form-control nzSpan="17" nzErrorTip="Seleccione un modelo">
-      <nz-select formControlName="idmodelo" nzPlaceHolder="Seleccionar..." nzAllowClear nzShowSearch>
-        <nz-option *ngFor="let modelo of modelos" [nzValue]="modelo.idmodelo" [nzLabel]="modelo.nombre+' '+modelo.anio"></nz-option>
-      </nz-select>
-    </nz-form-control>
-  </nz-form-item>
+  <div nz-row nzGutter="8">
+    <div nz-col nzSpan="16">
+      <nz-form-item>
+        <nz-form-label nzSpan="9" nzRequired>Modelo</nz-form-label>
+        <nz-form-control nzSpan="14" nzErrorTip="Seleccione un modelo">
+          <nz-select formControlName="idmodelo" nzPlaceHolder="Seleccionar..." nzAllowClear nzShowSearch>
+            <nz-option *ngFor="let modelo of modelos" [nzValue]="modelo.idmodelo" [nzLabel]="modelo.nombre">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="7">
+      <nz-form-item>
+        <nz-form-label nzSpan="7">Año</nz-form-label>
+        <nz-form-control nzSpan="16">
+          <nz-input-number formControlName="anio" style="width: 100%" nzPlaceHolder="Ej.: 2010"></nz-input-number>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
   <nz-form-item>
     <nz-form-label nzRequired nzSpan="6">Ingreso</nz-form-label>
     <nz-form-control nzSpan="17" nzErrorTip="Seleccione la fecha de ingreso.">
@@ -62,4 +78,5 @@
   </nz-form-item>
 </form>
 
-<nz-alert *ngIf="msgVisible" [nzType]="msgType" [nzMessage]="msg" [nzDescription]="msgDescription" (nzOnClose)="handleAlertClose()" nzShowIcon nzCloseable></nz-alert>
+<nz-alert *ngIf="msgVisible" [nzType]="msgType" [nzMessage]="msg" [nzDescription]="msgDescription"
+  (nzOnClose)="handleAlertClose()" nzShowIcon nzCloseable></nz-alert>

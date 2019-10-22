@@ -68,7 +68,7 @@ export class VistaModelosComponent implements OnInit {
   confirmarEliminacion(modelo: ModeloDTO) {
     this.modal.confirm({
       nzTitle: '<i>¿Desea eliminar el modelo?</i>',
-      nzContent: `<b> ${modelo.idmodelo} - ${modelo.nombre} ${modelo.anio} (${modelo.marca}) </b>`,
+      nzContent: `<b> ${modelo.idmodelo} - ${modelo.nombre} (${modelo.marca}) </b>`,
       nzOkType: 'danger',
       nzOkText: 'Eliminar',
       nzWrapClassName: 'vertical-center-modal',

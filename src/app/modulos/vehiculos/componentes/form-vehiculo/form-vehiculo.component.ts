@@ -32,11 +32,11 @@ export class FormVehiculoComponent implements OnInit {
   saved: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private formBuilder: FormBuilder,
-              private clientesSrv: ClientesService,
-              private notification: NzNotificationService,
-              private marcasSrv: MarcasService,
-              private modeloSrv: ModelosService,
-              private vehiculosSrv: VehiculosService) { }
+    private clientesSrv: ClientesService,
+    private notification: NzNotificationService,
+    private marcasSrv: MarcasService,
+    private modeloSrv: ModelosService,
+    private vehiculosSrv: VehiculosService) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -47,7 +47,8 @@ export class FormVehiculoComponent implements OnInit {
       fechaingreso: [null, [Validators.required]],
       color: ['', []],
       chapa: ['', []],
-      observacion: ['', []]
+      observacion: ['', []],
+      anio: [null, []]
     });
     this.cargarClientes();
     this.cargarMarcas();
@@ -173,15 +174,18 @@ export class FormVehiculoComponent implements OnInit {
     vehiculo.chapa = this.form.get('chapa').value;
     vehiculo.observacion = this.form.get('observacion').value;
     vehiculo.fechaIngreso = this.form.get('fechaingreso').value;
+    vehiculo.anioModelo = this.form.get('anio').value;
     return vehiculo;
   }
 
   nuevoVehiculo() {
+    this.msgVisible = false;
     this.modoModificar = false;
     this.form.reset();
   }
 
   editarVehiculo(vehiculo: VehiculoDTO) {
+    this.msgVisible = false;
     this.modoModificar = true;
     this.form.get('id').setValue(vehiculo.idvehiculo);
     this.form.get('cipropietario').setValue(vehiculo.cipropietario);

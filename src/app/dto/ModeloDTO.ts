@@ -3,5 +3,4 @@ export class ModeloDTO {
   nombre: string;
   idmarca: number;
   marca: string;
-  anio: number;
 }

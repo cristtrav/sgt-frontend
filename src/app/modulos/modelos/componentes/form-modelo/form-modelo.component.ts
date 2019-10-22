@@ -37,14 +37,8 @@ export class FormModeloComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: [null, [Validators.required]],
       nombre: [null, [Validators.required, Validators.maxLength(20)]],
-      idmarca: [null, [Validators.required]],
-      anio: [null, []]
+      idmarca: [null, [Validators.required]]
     });
-  }
-
-  get maxAnio(): number {
-    const anio: number = new Date().getFullYear() + 2;
-    return anio;
   }
 
   cargarMarcas() {
@@ -116,7 +110,6 @@ export class FormModeloComponent implements OnInit {
     modelo.idmodelo = this.form.get('id').value;
     modelo.nombre = this.form.get('nombre').value;
     modelo.idmarca = this.form.get('idmarca').value;
-    modelo.anio = this.form.get('anio').value;
     return modelo;
   }
 
@@ -148,6 +141,5 @@ export class FormModeloComponent implements OnInit {
     this.form.get('id').setValue(modelo.idmodelo);
     this.form.get('nombre').setValue(modelo.nombre);
     this.form.get('idmarca').setValue(modelo.idmarca);
-    this.form.get('anio').setValue(modelo.anio);
   }
 }
