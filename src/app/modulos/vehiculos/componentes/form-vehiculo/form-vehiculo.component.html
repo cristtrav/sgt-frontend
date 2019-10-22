@@ -1,0 +1,65 @@
+<form [formGroup]="form" nz-form>
+  <nz-form-item>
+    <nz-form-label nzSpan="6" nzRequired>Código</nz-form-label>
+    <nz-form-control nzSpan="17" nzErrorTip="Ingrese un código.">
+      <nz-input-number nzPlaceHolder="ID" formControlName="id"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="6" nzRequired>Propietario</nz-form-label>
+    <nz-form-control nzSpan="17" nzErrorTip="Seleccione un propietario.">
+      <nz-select formControlName="cipropietario" nzPlaceHolder="Seleccionar..." (nzOpenChange)="cargarClientes()" nzAllowClear nzShowSearch>
+        <nz-option *ngFor="let cliente of clientes" [nzValue]="cliente.ci" [nzLabel]="cliente.nombres+ ' ' +cliente.apellidos"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="6" nzRequired>Marca</nz-form-label>
+    <nz-form-control nzSpan="17" nzErrorTip="Seleccione una marca">
+      <nz-select formControlName="idmarca" nzPlaceHolder="Seleccionar..." (nzOpenChange)='cargarMarcas()' nzAllowClear nzShowSearch>
+        <nz-option *ngFor="let marca of marcas" [nzValue]="marca.idmarca" [nzLabel]="marca.nombre"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="6" nzRequired>Modelo</nz-form-label>
+    <nz-form-control nzSpan="17" nzErrorTip="Seleccione un modelo">
+      <nz-select formControlName="idmodelo" nzPlaceHolder="Seleccionar..." nzAllowClear nzShowSearch>
+        <nz-option *ngFor="let modelo of modelos" [nzValue]="modelo.idmodelo" [nzLabel]="modelo.nombre+' '+modelo.anio"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired nzSpan="6">Ingreso</nz-form-label>
+    <nz-form-control nzSpan="17" nzErrorTip="Seleccione la fecha de ingreso.">
+      <nz-date-picker formControlName="fechaingreso" nzFormat="dd/MM/yyyy"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <div nz-row nzGutter="8">
+    <div nz-col nzSpan="13">
+      <nz-form-item>
+        <nz-form-label nzSpan="11">Color</nz-form-label>
+        <nz-form-control nzSpan="13">
+          <input formControlName="color" nz-input placeholder="Ej.: Negro">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="11">
+      <nz-form-item>
+        <nz-form-label nzSpan="6">Chapa</nz-form-label>
+        <nz-form-control nzSpan="16">
+          <input formControlName="chapa" nz-input placeholder="Ej.: AEU-123">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <nz-form-item>
+    <nz-form-label nzSpan="6">Observación</nz-form-label>
+    <nz-form-control nzSpan="17">
+      <input nz-input formControlName="observacion" placeholder="Ej.: Motor cambiado">
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<nz-alert *ngIf="msgVisible" [nzType]="msgType" [nzMessage]="msg" [nzDescription]="msgDescription" (nzOnClose)="handleAlertClose()" nzShowIcon nzCloseable></nz-alert>

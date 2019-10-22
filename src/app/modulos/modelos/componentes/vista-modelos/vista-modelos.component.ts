@@ -27,7 +27,7 @@ export class VistaModelosComponent implements OnInit {
               private modal: NzModalService) { }
 
   cargarModelos() {
-    this.modelosSrv.getData().subscribe((data) => {
+    this.modelosSrv.getData({}).subscribe((data) => {
       this.modelos = data;
     }, (err) => {
       if (typeof err.error === 'string') {

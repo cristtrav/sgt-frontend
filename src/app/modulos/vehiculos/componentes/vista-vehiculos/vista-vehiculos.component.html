@@ -1,0 +1,59 @@
+<div>
+  <button nz-button nzType="primary" (click)="nuevoVehiculo()">
+    <i nz-icon nzType="plus"></i>
+    Agregar
+  </button>
+  <nz-modal [nzVisible]="modalFormVisible" [nzTitle]="titulo" [nzFooter]="pie" (nzOnCancel)="cerrarModalForm()" nzWrapClassName="vertical-center-modal">
+    <ng-template #titulo>
+      <span *ngIf="formVehiculoComponent.modoModificar == false" style="font-weight: bold;">Nuevo Vehiculo</span>
+      <span *ngIf="formVehiculoComponent.modoModificar" style="font-weight: bold;">Editar Vehiculo</span>
+    </ng-template>
+    <app-form-vehiculo (saved)="cargarVehiculos()"></app-form-vehiculo>
+    <ng-template #pie>
+      <button nz-button nzType="default" (click)="cerrarModalForm()">Cancelar</button>
+      <button nz-button nzType="primary" (click)="guardar()">
+        <i nz-icon nzType="save"></i>
+        Guardar
+      </button>
+    </ng-template>
+  </nz-modal>
+</div>
+<div style="margin-top: 10px;">
+  <nz-table #tabla [nzData]="vehiculos">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Propietario</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Año</th>
+        <th>Color</th>
+        <th>Chapa</th>
+        <th>Fecha Ingreso</th>
+        <th>Observación</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vehiculo of tabla.data">
+        <td>{{ vehiculo.idvehiculo }}</td>
+        <td>{{ vehiculo.nombresPropietario }} {{ vehiculo.apellidosPropietario }}</td>
+        <td>{{ vehiculo.marca }}</td>
+        <td>{{ vehiculo.modelo }}</td>
+        <td>{{ vehiculo.anioModelo }}</td>
+        <td>{{ vehiculo.color }}</td>
+        <td>{{ vehiculo.chapa }}</td>
+        <td>{{ formatDate(vehiculo.fechaIngreso) }}</td>
+        <td>{{ vehiculo.observacion }}</td>
+        <td>
+          <button style="margin-left: 5px" nz-button nzType="primary" (click)="editarVehiculo(vehiculo)" nzGhost>
+            <i nz-icon nzType="edit"></i>
+          </button>
+          <button style="margin-left: 5px" nz-button nzType="danger" (click)="confirmarEliminacion(vehiculo)" nzGhost>
+            <i nz-icon nzType="delete"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

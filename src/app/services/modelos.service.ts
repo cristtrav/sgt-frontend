@@ -27,8 +27,16 @@ export class ModelosService {
     return this.http.put<ModeloDTO>(`${this.url}/${modelo.idmodelo}`, modelo, this.httpOptions);
   }
 
-  getData(): Observable<ModeloDTO[]> {
-    return this.http.get<ModeloDTO[]>(this.url);
+  getData(params): Observable<ModeloDTO[]> {
+    if (params != null) {
+      if (params.idmarca != null) {
+        return this.http.get<ModeloDTO[]>(`${this.url}?idmarca=${params.idmarca}`);
+      } else {
+        return this.http.get<ModeloDTO[]>(this.url);
+      }
+    } else {
+      return this.http.get<ModeloDTO[]>(this.url);
+    }
   }
 
   deleteData(modelo: ModeloDTO): Observable<any> {
