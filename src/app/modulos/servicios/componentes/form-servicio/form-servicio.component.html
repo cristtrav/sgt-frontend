@@ -1,0 +1,38 @@
+<form [formGroup]="form" nz-form>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired>Código</nz-form-label>
+    <nz-form-control nzSpan="18" nzErrorTip="Ingrese un código.">
+      <nz-input-number [nzDisabled]="modoModificar" nzMin="0" formControlName="id" nzPlaceHolder="ID"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired>Descripción</nz-form-label>
+    <nz-form-control nzSpan="18" nzErrorTip="Requerido. Longitud máx. 45 carácteres.">
+      <input formControlName="nombre" nz-input placeholder="Ej.: Mantenimiento">
+    </nz-form-control>
+  </nz-form-item>
+  <div nz-row nzGutter="8">
+      <div nz-col nzSpan="15">
+          <nz-form-item>
+            <nz-form-label nzSpan="8" nzRequired>Precio</nz-form-label>
+            <nz-form-control nzSpan="15" nzErrorTip="Ingrese el precio.">
+              <nz-input-number nzMin="0" formControlName="precio" style="width: 100%;" nzPlaceHolder="Ej.: 200000"></nz-input-number>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+    <div nz-col nzSpan="9">
+      <nz-form-item>
+        <nz-form-label nzRequired nzSpan="6">IVA</nz-form-label>
+        <nz-form-control nzSpan="15" nzErrorTip="Requerido.">
+          <nz-select formControlName="iva" nzPlaceHolder="Seleccionar..." formControlName="iva">
+            <nz-option nzValue="10" nzLabel="10%"></nz-option>
+            <nz-option nzValue="5" nzLabel="5%"></nz-option>
+            <nz-option nzValue="0" nzLabel="Exenta"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+</form>
+
+<nz-alert *ngIf="msgVisible" [nzType]="msgType" [nzMessage]="msg" [nzDescription]="msgDescription" (nzOnClose)="handleAlertClose()" nzShowIcon nzCloseable></nz-alert>
