@@ -67,17 +67,12 @@ export class FormProveedorComponent implements OnInit {
     proveedor.telefono = this.form.get('telefono').value;
     proveedor.email = this.form.get('email').value;
     proveedor.fechaIngreso = this.form.get('fechaingreso').value;
-    // const fi: Date = this.form.get('fechaingreso').value;
-    // let strFi = fi.getFullYear().toString();
-    // strFi += '-' + (fi.getMonth() + 1).toString().padStart(2, '0');
-    // strFi += '-' + fi.getDate().toString().padStart(2, '0');
-    // proveedor.fechaIngreso = strFi;
     return proveedor;
   }
 
   guardar() {
     if (this.validar()) {
-      if (this.modificar) {
+      if (this.modoModificar) {
         this.modificar(this.getDto());
       } else {
         this.crear(this.getDto());
@@ -147,7 +142,7 @@ export class FormProveedorComponent implements OnInit {
     this.form.get('telefono').setValue(proveedor.telefono);
     this.form.get('email').setValue(proveedor.email);
     proveedor.fechaIngreso = this.form.get('fechaingreso').value;
-
+    this.msgVisible = false;
     this.modoModificar = true;
   }
 

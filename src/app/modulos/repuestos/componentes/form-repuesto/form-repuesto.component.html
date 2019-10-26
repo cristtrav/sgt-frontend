@@ -1,0 +1,42 @@
+<form nz-form [formGroup]="form">
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired>Código</nz-form-label>
+    <nz-form-control nzSpan="17" nzErrorTip="Ingrese un código.">
+      <nz-input-number [nzDisabled]="modoModificar" formControlName="id" nzMin="0" nzPlaceHolder="ID"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired>Descripción</nz-form-label>
+    <nz-form-control nzSpan="17" nzErrorTip="Ingrese una descripción. Long. máx. 45 carácteres.">
+      <input nz-input placeholder="Ej.: Aceite" formControlName="nombre">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="5" nzRequired>Precio</nz-form-label>
+    <nz-form-control nzSpan="17" nzErrorTip="Ingrese el precio de venta.">
+      <nz-input-number style="width: 100%;" nzMin="0" nzPlaceHolder="Ej.: 50000" formControlName="precio">
+      </nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <div nz-row nzGutter="8">
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label nzSpan="10" nzRequired>Stock</nz-form-label>
+        <nz-form-control nzSpan="11" nzErrorTip="Requerido.">
+          <nz-input-number style="width: 100%;" nzMin="0" formControlName="stock" nzPlaceHolder="Ej.: 10"></nz-input-number>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label nzRequired nzSpan="9">Stock Min.</nz-form-label>
+        <nz-form-control nzSpan="11" nzErrorTip="Requerido.">
+          <nz-input-number style="width: 100%;" formControlName="stockminimo" nzMin="0" nzPlaceHolder="Ej.: 5"></nz-input-number>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+</form>
+<nz-alert *ngIf="msgVisible" [nzType]="msgType" [nzMessage]="msg" [nzDescription]="msgDescription"
+  (nzOnClose)="handleAlertClose()" nzShowIcon nzCloseable></nz-alert>
