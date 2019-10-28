@@ -1,0 +1,105 @@
+<div nz-row nzGutter="16">
+
+  <div nz-col nzSpan="16">
+    <div nz-row nzGutter="8">
+      <div nzSpan="17" nz-col>
+        <nz-form-control [nzValidateStatus]="idrepuestoagregarValidateStatus">
+        <nz-input-group>
+          <nz-select [(ngModel)]="idrepuestoagregar"
+          [nzSuffixIcon]="searchIcon"
+          style="width: 100%;"
+          nzPlaceHolder="Buscar insumo..."
+          (nzOpenChange)="cargarRepuestos()"
+          nzAllowClear
+          nzShowSearch>
+            <nz-option *ngFor="let repuesto of repuestos" [nzLabel]="repuesto.nombre" [nzValue]="repuesto.idrepuesto"></nz-option>
+          </nz-select>
+        </nz-input-group>
+      </nz-form-control>
+        <ng-template #searchIcon>
+          <i nz-icon nzType="search"></i>
+        </ng-template>
+      </div>
+      <div nzSpan="4" nz-col>
+        <nz-input-number [(ngModel)]="cantidadRepuestoAgregar" style="width: 100%;" nzPlaceHolder="Cantidad"></nz-input-number>
+      </div>
+      <div nzSpan="3" nz-col>
+        <button [disabled]="recibidoPedidoModificar" style="width: 100%;" nz-button nzType="primary" (click)="agregarRepuesto()">
+          <i nz-icon nzType="plus"></i>
+          Agregar
+        </button>
+      </div>
+    </div>
+    <div style="margin-top: 10px;" nz-row nzGutter="8">
+      <div nz-col nzSpan="24">
+        <nz-table [nzData]="detallesPedidos" #tabladetalle [nzFooter]="pietabla">
+          <thead>
+            <tr>
+              <th>Insumo</th>
+              <th>Cantidad</th>
+              <th>Precio U.</th>
+              <th>Subtotal</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let detallepedido of tabladetalle.data; let i = index">
+              <td>{{ detallepedido.repuesto }}</td>
+              <td>{{ detallepedido.cantidad | number: '1.0-4' }}</td>
+              <td>{{ detallepedido.precio | number: '1.0-4' }}</td>
+              <td>{{ detallepedido.subtotal | number: '1.0-4' }}</td>
+              <td>
+                <button [disabled]="recibidoPedidoModificar" style="margin-left: 5px" nz-button nzType="danger" (click)="quitarDetalle(i)" nzGhost>
+                  <i nz-icon nzType="delete"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+        <ng-template #pietabla>
+          <span style="font-weight: bold;">Total: </span>{{ calcularTotal() | number: '1.0-4' }}
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div nz-col nzSpan="8">
+    <form [formGroup]="formCabecera" nz-form>
+      <nz-form-item *ngIf="idpedidoModificar">
+        <nz-form-label nzSpan="6">Código</nz-form-label>
+        <nz-form-control nzSpan="17">
+          <input style="width: 90px;" disabled nz-input value="{{ idpedidoModificar }}">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+          <nz-form-label nzSpan="6" nzRequired>Proveedor</nz-form-label>
+          <nz-form-control nzSpan="17" nzErrorTip="Seleccione un proveedor.">
+            <nz-select [nzDisabled]="recibidoPedidoModificar" formControlName="idproveedor" nzPlaceHolder="Seleccionar..." (nzOpenChange)="cargarProveedores()" nzAllowClear nzShowSearch>
+              <nz-option *ngFor="let proveedor of proveedores" [nzLabel]="proveedor.razonsocial" [nzValue]="proveedor.idproveedor" ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzSpan="6" nzRequired>Fecha pedido</nz-form-label>
+        <nz-form-control nzSpan="17" nzErrorTip="Ingrese la fecha del pedido.">
+          <nz-date-picker [nzDisabled]="recibidoPedidoModificar" formControlName="fechapedido" style="width: 180px;" nzFormat="dd/MM/yyyy"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item *ngIf="recibidoPedidoModificar && modoModificar">
+          <nz-form-label nzSpan="6" nzRequired>Fecha recepción</nz-form-label>
+          <nz-form-control nzSpan="17" [nzErrorTip]="fechaRecepcionValidationMsg" [nzValidateStatus]="fechaRecepcionValidStatus">
+            <nz-date-picker formControlName="fecharecepcion" style="width: 180px;" nzFormat="dd/MM/yyyy"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+    </form>
+    <div nz-row>
+      <div nz-col nzSpan="23" style="text-align: right;">
+        <button nz-button nzType="primary" (click)="guardarPedido()">
+          <i nz-icon nzType="save"></i>
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

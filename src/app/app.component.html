@@ -1,10 +1,6 @@
 <nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar"
-            nzCollapsible
-            nzWidth="256px"
-            nzBreakpoint="md"
-            [(nzCollapsed)]="isCollapsed"
-            [nzTrigger]="null">
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
     <div class="sidebar-logo">
       <a href="#">
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
@@ -35,14 +31,15 @@
       <li nz-submenu nzTitle="Personas" nzIcon="user">
         <ul>
           <li nz-menu-item nzMatchRouter>
+            <a routerLink="/cargos">Cargos</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
             <a routerLink="/clientes">Clientes</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/proveedores">Proveedores</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/cargos">Cargos</a>
-          </li>
+
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/empleados">Empleados</a>
           </li>
@@ -77,17 +74,17 @@
             <a routerLink="/repuestos">Repuestos</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/pedidos">Pedidos</a>
+            <a routerLink="/pedidosproveedores">Pedidos</a>
           </li>
         </ul>
       </li>
       <li nz-submenu nzTitle="Facturación" nzIcon="dollar">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/repuestos">Compras</a>
+            <a routerLink="/compras">Compras</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/pedidos">Ventas</a>
+            <a routerLink="/ventas">Ventas</a>
           </li>
         </ul>
       </li>
@@ -97,10 +94,7 @@
     <nz-header>
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <i class="trigger"
-               nz-icon
-               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-            ></i>
+          <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
         </span>
       </div>
     </nz-header>

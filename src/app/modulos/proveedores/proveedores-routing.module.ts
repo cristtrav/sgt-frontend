@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, RoutesRecognized, Router } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { VistaProveedoresComponent } from './componentes/vista-proveedores/vista-proveedores.component';
 
 const routes: Routes = [
