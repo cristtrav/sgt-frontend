@@ -24,7 +24,7 @@
         <nz-input-number [(ngModel)]="cantidadRepuestoAgregar" style="width: 100%;" nzPlaceHolder="Cantidad"></nz-input-number>
       </div>
       <div nzSpan="3" nz-col>
-        <button [disabled]="recibidoPedidoModificar" style="width: 100%;" nz-button nzType="primary" (click)="agregarRepuesto()">
+        <button [disabled]="pedidoModificar.recibido == 1" style="width: 100%;" nz-button nzType="primary" (click)="agregarRepuesto()">
           <i nz-icon nzType="plus"></i>
           Agregar
         </button>
@@ -49,7 +49,7 @@
               <td>{{ detallepedido.precio | number: '1.0-4' }}</td>
               <td>{{ detallepedido.subtotal | number: '1.0-4' }}</td>
               <td>
-                <button [disabled]="recibidoPedidoModificar" style="margin-left: 5px" nz-button nzType="danger" (click)="quitarDetalle(i)" nzGhost>
+                <button [disabled]="pedidoModificar.recibido == 1" style="margin-left: 5px" nz-button nzType="danger" (click)="quitarDetalle(i)" nzGhost>
                   <i nz-icon nzType="delete"></i>
                 </button>
               </td>
@@ -65,16 +65,16 @@
 
   <div nz-col nzSpan="8">
     <form [formGroup]="formCabecera" nz-form>
-      <nz-form-item *ngIf="idpedidoModificar">
+      <nz-form-item *ngIf="pedidoModificar.idpedido">
         <nz-form-label nzSpan="6">Código</nz-form-label>
         <nz-form-control nzSpan="17">
-          <input style="width: 90px;" disabled nz-input value="{{ idpedidoModificar }}">
+          <input style="width: 90px;" disabled nz-input value="{{ modoModificar }}">
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
           <nz-form-label nzSpan="6" nzRequired>Proveedor</nz-form-label>
           <nz-form-control nzSpan="17" nzErrorTip="Seleccione un proveedor.">
-            <nz-select [nzDisabled]="recibidoPedidoModificar" formControlName="idproveedor" nzPlaceHolder="Seleccionar..." (nzOpenChange)="cargarProveedores()" nzAllowClear nzShowSearch>
+            <nz-select [nzDisabled]="pedidoModificar.recibido == 1" formControlName="idproveedor" nzPlaceHolder="Seleccionar..." (nzOpenChange)="cargarProveedores()" nzAllowClear nzShowSearch>
               <nz-option *ngFor="let proveedor of proveedores" [nzLabel]="proveedor.razonsocial" [nzValue]="proveedor.idproveedor" ></nz-option>
             </nz-select>
           </nz-form-control>
@@ -82,10 +82,10 @@
       <nz-form-item>
         <nz-form-label nzSpan="6" nzRequired>Fecha pedido</nz-form-label>
         <nz-form-control nzSpan="17" nzErrorTip="Ingrese la fecha del pedido.">
-          <nz-date-picker [nzDisabled]="recibidoPedidoModificar" formControlName="fechapedido" style="width: 180px;" nzFormat="dd/MM/yyyy"></nz-date-picker>
+          <nz-date-picker [nzDisabled]="pedidoModificar.recibido == 1" formControlName="fechapedido" style="width: 180px;" nzFormat="dd/MM/yyyy"></nz-date-picker>
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item *ngIf="recibidoPedidoModificar && modoModificar">
+      <nz-form-item *ngIf="pedidoModificar.recibido == 1 && modoModificar">
           <nz-form-label nzSpan="6" nzRequired>Fecha recepción</nz-form-label>
           <nz-form-control nzSpan="17" [nzErrorTip]="fechaRecepcionValidationMsg" [nzValidateStatus]="fechaRecepcionValidStatus">
             <nz-date-picker formControlName="fecharecepcion" style="width: 180px;" nzFormat="dd/MM/yyyy"></nz-date-picker>

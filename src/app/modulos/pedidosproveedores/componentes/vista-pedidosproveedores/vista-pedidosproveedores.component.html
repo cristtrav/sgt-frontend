@@ -10,10 +10,11 @@
       <tr>
         <th>Código</th>
         <th>Proveedor</th>
-        <th>Fecha</th>
         <th>Total</th>
+        <th>Fecha Pedido</th>
+        <th>Pedido por</th>
+        <th>Aprobado</th>
         <th>Recibido</th>
-        <th>Fecha recepción</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -21,35 +22,62 @@
       <tr *ngFor="let pedido of tabla.data">
         <td>{{ pedido.idpedido }}</td>
         <td>{{ pedido.proveedor }}</td>
-        <td>{{ formatDate(pedido.fechaPedido) }}</td>
         <td>{{ pedido.total | number: '1.0-4' }}</td>
+        <td>{{ formatDate(pedido.fechaPedido) }}</td>
+        <td>{{ pedido.nombresFuncionarioPedido }} {{ pedido.apellidosFuncionarioPedido }}</td>
         <td>
-          <i *ngIf="pedido.recibido" nz-icon style="font-size: 20px" [nzType]="'check-circle'" [nzTheme]="'twotone'"
-            [nzTwotoneColor]="'#52c41a'"></i>
-          <i *ngIf="pedido.recibido == false" nz-icon style="font-size: 20px" [nzType]="'close-circle'"
-            [nzTheme]="'twotone'" [nzTwotoneColor]="'#f44336'"></i>
+          <i nz-icon nz-popover [nzPopoverContent]="datosaprobacion" style="font-size: 20px"
+            [nzType]="pedido.aprobado?'check-circle':'close-circle'" [nzTheme]="'twotone'"
+            [nzTwotoneColor]="pedido.aprobado?'#52c41a':'#f44336'"></i>
+          <ng-template #datosaprobacion>
+            <div *ngIf="pedido.aprobado">
+              <p>
+                <span style="font-weight: bold;">Aprobado por:</span>
+                {{ pedido.nombresFuncionarioAprobacion }} {{ pedido.apellidosFuncionarioAprobacion }}
+              </p>
+              <p>
+                <span style="font-weight: bold;">Fecha:</span>
+                {{ formatDate(pedido.fechaAprobacion) }}
+              </p>
+            </div>
+            <div *ngIf="!pedido.aprobado">
+              <span style="font-weight: bold;">Pendiente de aprobación</span>
+            </div>
+          </ng-template>
         </td>
         <td>
-          <span *ngIf="pedido.fechaRecepcion">{{ formatDate(pedido.fechaRecepcion) }}</span>
-          <span *ngIf="!pedido.fechaRecepcion"><i nz-icon nzType="minus" style="font-size: 20px;"></i></span>
+          <i nz-icon nz-popover [nzPopoverContent]="datosrecepcion" style="font-size: 20px"
+            [nzType]="pedido.recibido?'check-circle':'close-circle'" [nzTheme]="'twotone'"
+            [nzTwotoneColor]="pedido.recibido?'#52c41a':'#f44336'"></i>
+          <ng-template #datosrecepcion>
+            <div *ngIf="pedido.recibido">
+              <p>
+                <span style="font-weight: bold;">Recibido por:</span>
+                {{ pedido.nombresFuncionarioRecepcion }} {{ pedido.apellidosFuncionarioRecepcion }}
+              </p>
+              <p>
+                <span style="font-weight: bold;">Fecha:</span>
+                {{ formatDate(pedido.fechaRecepcion) }}
+              </p>
+            </div>
+            <div *ngIf="!pedido.recibido">
+              <span style="font-weight: bold;">Pendiente de recepción.</span>
+            </div>
+          </ng-template>
         </td>
         <td>
-          <button
-          style="margin-left: 5px"
-          nz-button nzType="primary"
-          routerLink="/pedidosproveedores/{{ pedido.idpedido }}"
-          nzGhost
-          nzTooltipTitle="Editar pedido" nzTooltipPlacement="top" nz-tooltip>
+          <button style="margin-left: 5px" nz-button nzType="primary"
+            routerLink="/pedidosproveedores/{{ pedido.idpedido }}" nzGhost nzTooltipTitle="Editar pedido" nz-tooltip>
             <i nz-icon nzType="edit"></i>
           </button>
-          <button
-          *ngIf="!pedido.recibido"
-          style="margin-left: 5px"
-          nz-button nzType="danger"
-          (click)="confirmarEliminacion(pedido)"
-          nzGhost
-          nzTooltipTitle="Eliminar pedido" nzTooltipPlacement="top" nz-tooltip>
-            <i nz-icon nzType="delete"></i>
+          <button *ngIf="!pedido.aprobado" style="margin-left: 5px" nz-button nzType="primary" nzTooltipTitle="Aprobar" nz-tooltip nzGhost
+          nz-popconfirm nzPopconfirmTitle="¿Realmente desea aprobar el pedido?" (nzOnConfirm)="aprobarPedido(pedido)">
+            <i nz-icon nzType="check"></i>
+          </button>
+          <button *ngIf="!pedido.recibido" style="margin-left: 5px" nz-button nzType="danger"
+            (click)="confirmarEliminacion(pedido)" nzGhost nzTooltipTitle="Anular pedido" nzTooltipPlacement="top"
+            nz-tooltip>
+            <i nz-icon nzType="minus"></i>
           </button>
         </td>
       </tr>

@@ -18,8 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DetallepedidoproveedorComponent implements OnInit {
 
   modoModificar = false;
-  idpedidoModificar: number;
-  recibidoPedidoModificar = false;
+  pedidoModificar: PedidoProveedorDTO = new PedidoProveedorDTO();
 
   detallesPedidos: DetallePedidoProveedorDTO[] = [];
   repuestos: RepuestoDTO[];
@@ -32,7 +31,7 @@ export class DetallepedidoproveedorComponent implements OnInit {
   formCabecera: FormGroup;
 
   fechaRecepcionValidStatus = 'success';
-  fechaRecepcionValidationMsg = 'Ingrese la fecha de recepción.'
+  fechaRecepcionValidationMsg = 'Ingrese la fecha de recepción.';
 
   constructor(private repuestosSrv: RepuestosService,
               private notification: NzNotificationService,
@@ -67,17 +66,16 @@ export class DetallepedidoproveedorComponent implements OnInit {
   private cargarDatosPedido(id: number) {
     this.pedidosproveedoresSrv.getPedido(id).subscribe((data) => {
       this.modoModificar = true;
-      this.idpedidoModificar = data.idpedido;
-      this.recibidoPedidoModificar = data.recibido === 1 ? true : false;
+      this.pedidoModificar = data;
 
-      if (this.modificar && this.recibidoPedidoModificar) {
+      if (this.modificar && this.pedidoModificar.recibido) {
 
-        this.formCabecera.get('fecharecepcion').setValue(new Date(data.fechaRecepcion));
-        this.formCabecera.get('fechapedido').setValue(new Date(data.fechaPedido));
-        this.formCabecera.get('idproveedor').setValue(data.idproveedor);
+        this.formCabecera.get('fecharecepcion').setValue(new Date(this.pedidoModificar.fechaRecepcion));
+        this.formCabecera.get('fechapedido').setValue(new Date(this.pedidoModificar.fechaPedido));
+        this.formCabecera.get('idproveedor').setValue(this.pedidoModificar.idproveedor);
       } else {
-        this.formCabecera.get('fechapedido').setValue(new Date(data.fechaPedido));
-        this.formCabecera.get('idproveedor').setValue(data.idproveedor);
+        this.formCabecera.get('fechapedido').setValue(new Date(this.pedidoModificar.fechaPedido));
+        this.formCabecera.get('idproveedor').setValue(this.pedidoModificar.idproveedor);
       }
 
 
@@ -186,7 +184,7 @@ export class DetallepedidoproveedorComponent implements OnInit {
     if (this.validar()) {
       if (this.detallesPedidos.length > 0) {
         if (this.modoModificar) {
-          if (this.recibidoPedidoModificar && this.formCabecera.get('fecharecepcion') == null) {
+          if (this.pedidoModificar.recibido && this.formCabecera.get('fecharecepcion') == null) {
             this.fechaRecepcionValidStatus = 'error';
             this.fechaRecepcionValidationMsg = 'Ingrese la fecha de recepción.';
           } else {
@@ -234,8 +232,12 @@ export class DetallepedidoproveedorComponent implements OnInit {
   }
 
   private getDto() {
-    const pedidoproveedor: PedidoProveedorDTO = new PedidoProveedorDTO();
-    pedidoproveedor.idpedido = this.idpedidoModificar;
+    let pedidoproveedor: PedidoProveedorDTO;
+    if (this.modoModificar) {
+      pedidoproveedor = this.pedidoModificar;
+    } else {
+      pedidoproveedor = new PedidoProveedorDTO();
+    }
     const fp: Date = new Date(this.formCabecera.get('fechapedido').value);
     pedidoproveedor.fechaPedido = new Date(fp.getFullYear(), fp.getMonth(), fp.getDate(), 0, 0, 0);
     console.log('fecha recepcion getdto: ' + this.formCabecera.get('fecharecepcion').value);
@@ -246,7 +248,7 @@ export class DetallepedidoproveedorComponent implements OnInit {
     pedidoproveedor.idproveedor = this.formCabecera.get('idproveedor').value;
     pedidoproveedor.detallepedido = this.detallesPedidos;
     pedidoproveedor.total = this.calcularTotal();
-    pedidoproveedor.idfuncionario = 1;
+    pedidoproveedor.idfuncionarioPedido = 1;
     return pedidoproveedor;
   }
 

@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'vehiculos', loadChildren: () => import('./modulos/vehiculos/vehiculos.module').then(m => m.VehiculosModule) },
   { path: 'servicios', loadChildren: () => import('./modulos/servicios/servicios.module').then(m => m.ServiciosModule) },
   { path: 'repuestos', loadChildren: () => import('./modulos/repuestos/repuestos.module').then(m => m.RepuestosModule) },
-  { path: 'pedidosproveedores', loadChildren: () => import('./modulos/pedidosproveedores/pedidosproveedores.module').then(m => m.PedidosproveedoresModule) }
+  { path: 'pedidosproveedores', loadChildren: () => import('./modulos/pedidosproveedores/pedidosproveedores.module').then(m => m.PedidosproveedoresModule) },
+  { path: 'compras', loadChildren: () => import('./modulos/compras/compras.module').then(m => m.ComprasModule) }
 ];
 
 @NgModule({

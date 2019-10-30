@@ -25,14 +25,14 @@ export class PedidosproveedoresService {
   }
 
   getData(): Observable<PedidoProveedorDTO[]> {
-      return this.http.get<PedidoProveedorDTO[]>(this.url);
+    return this.http.get<PedidoProveedorDTO[]>(`${this.url}?anulado=false`);
   }
 
   deleteData(pedido: PedidoProveedorDTO): Observable<any> {
     return this.http.delete(`${this.url}/${pedido.idpedido}`);
   }
 
-  getPedido(idpedido: number): Observable<PedidoProveedorDTO>{
+  getPedido(idpedido: number): Observable<PedidoProveedorDTO> {
     return this.http.get<PedidoProveedorDTO>(`${this.url}/${idpedido}`);
   }
 
@@ -42,5 +42,14 @@ export class PedidosproveedoresService {
 
   putData(pedido: PedidoProveedorDTO): Observable<any> {
     return this.http.put<PedidoProveedorDTO>(this.url, pedido, this.httpOptions);
+  }
+
+  postAprobacion(idpedido: number, idfuncionarioAprobacion: number, fechaAprobacion: Date): Observable<any> {
+    const data = { idpedido, idfuncionarioAprobacion, fechaAprobacion };
+    return this.http.post(`${this.url}/${idpedido}/aprobacion`, data, this.httpOptions);
+  }
+
+  postAnulacion(idpedido: number): Observable<any> {
+    return this.http.post(`${this.url}/${idpedido}/anulacion`, { idpedido }, this.httpOptions);
   }
 }

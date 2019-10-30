@@ -6,4 +6,5 @@ export class DetallePedidoProveedorDTO {
   precio: number;
   cantidad: number;
   subtotal: number;
+  cantidadRecibida: number;
 }

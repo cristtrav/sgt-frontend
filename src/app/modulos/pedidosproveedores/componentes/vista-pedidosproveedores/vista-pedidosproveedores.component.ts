@@ -42,23 +42,38 @@ export class VistaPedidosproveedoresComponent implements OnInit {
 
   confirmarEliminacion(pedido: PedidoProveedorDTO) {
     this.modal.confirm({
-      nzTitle: '<i>¿Desea eliminar el pedido?</i>',
+      nzTitle: '<i>¿Desea anular el pedido?</i>',
       nzContent: `<b> Código ${pedido.idpedido}. Proveedor: ${pedido.proveedor}. Monto: ${pedido.total} </b>`,
       nzOkType: 'danger',
-      nzOkText: 'Eliminar',
+      nzOkText: 'Anular',
       nzWrapClassName: 'vertical-center-modal',
       nzOnOk: () => {
-        this.pedidosProveedoresSrv.deleteData(pedido).subscribe(() => {
+        this.pedidosProveedoresSrv.postAnulacion(pedido.idpedido).subscribe(() => {
           this.cargarPedidosProveedores();
-          this.notification.create('success', 'Pedido eliminado', '');
+          this.notification.create('success', 'Pedido anulado', '');
         }, error => {
           if (typeof error.error === 'string') {
-            this.notification.create('error', 'Error al eliminar', error.error);
+            this.notification.create('error', 'Error al anular', error.error);
           } else {
-            this.notification.create('error', 'Error al eliminar', error.message);
+            this.notification.create('error', 'Error al anular', error.message);
           }
           console.log(error);
         });
+      }
+    });
+  }
+
+  aprobarPedido(pedido: PedidoProveedorDTO) {
+    const dnow: Date = new Date(Date.now());
+    const da: Date = new Date(dnow.getFullYear(), dnow.getMonth(), dnow.getDate(), 0, 0, 0);
+    this.pedidosProveedoresSrv.postAprobacion(pedido.idpedido, 1, da).subscribe(() => {
+      this.cargarPedidosProveedores();
+      this.notification.create('success', 'Pedido aprobado', '');
+    }, (err) => {
+      if (typeof err.error === 'string') {
+        this.notification.create('error', 'Error al aprobar', err.error);
+      } else {
+        this.notification.create('error', 'Error al aprobar', err.message);
       }
     });
   }
