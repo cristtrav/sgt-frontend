@@ -40,7 +40,7 @@ export class VistaPedidosproveedoresComponent implements OnInit {
     return ff;
   }
 
-  confirmarEliminacion(pedido: PedidoProveedorDTO) {
+  confirmarAnulacion(pedido: PedidoProveedorDTO) {
     this.modal.confirm({
       nzTitle: '<i>¿Desea anular el pedido?</i>',
       nzContent: `<b> Código ${pedido.idpedido}. Proveedor: ${pedido.proveedor}. Monto: ${pedido.total} </b>`,

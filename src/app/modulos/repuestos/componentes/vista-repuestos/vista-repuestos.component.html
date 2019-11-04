@@ -35,7 +35,7 @@
       <tr *ngFor="let repuesto of tabla.data">
         <td>{{ repuesto.idrepuesto }}</td>
         <td>{{ repuesto.nombre }}</td>
-        <td>{{ repuesto.precio }}</td>
+        <td>{{ repuesto.precio | number: '1.0-4' }}</td>
         <td>{{ repuesto.stock }}</td>
         <td>{{ repuesto.stockMinimo }}</td>
         <td>

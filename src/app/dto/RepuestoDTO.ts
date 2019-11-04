@@ -4,4 +4,5 @@ export class RepuestoDTO {
   precio: number;
   stock: number;
   stockMinimo: number;
+  porcentajeIva: number;
 }

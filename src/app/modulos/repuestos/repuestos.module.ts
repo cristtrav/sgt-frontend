@@ -6,6 +6,7 @@ import { RepuestosRoutingModule } from './repuestos-routing.module';
 import { NgZorroAntdModule, NZ_I18N, es_ES, NzModalService, NzNotificationService } from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RepuestosService } from './../../services/repuestos.service';
+import { LOCALE_ID } from '@angular/core';
 
 @NgModule({
   declarations: [VistaRepuestosComponent, FormRepuestoComponent],
@@ -20,7 +21,8 @@ import { RepuestosService } from './../../services/repuestos.service';
     { provide: NZ_I18N, useValue: es_ES },
     RepuestosService,
     NzModalService,
-    NzNotificationService
+    NzNotificationService,
+    { provide: LOCALE_ID, useValue: 'es_PY'}
   ]
 })
 export class RepuestosModule { }

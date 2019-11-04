@@ -70,14 +70,18 @@
             routerLink="/pedidosproveedores/{{ pedido.idpedido }}" nzGhost nzTooltipTitle="Editar pedido" nz-tooltip>
             <i nz-icon nzType="edit"></i>
           </button>
-          <button *ngIf="!pedido.aprobado" style="margin-left: 5px" nz-button nzType="primary" nzTooltipTitle="Aprobar" nz-tooltip nzGhost
+          <button *ngIf="pedido.aprobado === 0" style="margin-left: 5px" nz-button nzType="primary" nzTooltipTitle="Aprobar" nz-tooltip nzGhost
           nz-popconfirm nzPopconfirmTitle="¿Realmente desea aprobar el pedido?" (nzOnConfirm)="aprobarPedido(pedido)">
-            <i nz-icon nzType="check"></i>
+            <i nz-icon nzType="like"></i>
           </button>
-          <button *ngIf="!pedido.recibido" style="margin-left: 5px" nz-button nzType="danger"
-            (click)="confirmarEliminacion(pedido)" nzGhost nzTooltipTitle="Anular pedido" nzTooltipPlacement="top"
+          <button *ngIf="pedido.aprobado === 1 && pedido.recibido === 0" nz-button nzType="primary" style="margin-left: 5px" nz-tooltip nzTooltipTitle="Recibir y facturar" nzGhost
+          [routerLink]="['/compras/detalle']" [queryParams]="{ idpedido: pedido.idpedido }">
+            <i nz-icon nzType="import"></i>
+          </button>
+          <button *ngIf="pedido.recibido === 0" style="margin-left: 5px" nz-button nzType="danger"
+            (click)="confirmarAnulacion(pedido)" nzGhost nzTooltipTitle="Anular pedido" nzTooltipPlacement="top"
             nz-tooltip>
-            <i nz-icon nzType="minus"></i>
+            <i nz-icon nzType="stop"></i>
           </button>
         </td>
       </tr>

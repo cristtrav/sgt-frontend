@@ -1,1 +1,42 @@
-<p>vista-compras works!</p>
+<div>
+  <button nz-button nzType="primary" routerLink="/compras/detalle">
+    <i nz-icon nzType="plus"></i>
+    Agregar
+  </button>
+</div>
+<div style="margin-top: 10px;">
+  <nz-table #tabla [nzData]="compras">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Proveedor</th>
+        <th>Núm. Factura</th>
+        <th>Fecha</th>
+        <th>Condición</th>
+        <th>Total</th>
+        <th>Pagado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let compra of tabla.data">
+        <td>{{ compra.idcompra }}</td>
+        <td>{{ compra.proveedor }}</td>
+        <td>{{ compra.nroFactura }}</td>
+        <td>{{ formatDate(compra.fecha) }}</td>
+        <td>{{ compra.contado === 1 ? 'Contado' : 'Crédito' }}</td>
+        <td>{{ compra.total | number: '1.0-4' }}</td>
+        <td>
+            <i nz-icon nz-popover style="font-size: 20px"
+            [nzType]="compra.pagado === 1?'check-circle':'close-circle'" [nzTheme]="'twotone'"
+            [nzTwotoneColor]="compra.pagado === 1?'#52c41a':'#f44336'"></i>
+        </td>
+        <td>
+          <button nz-tooltip nzTooltipTitle="Anular compra" nz-button nzType="danger" (click)="confirmarAnulacion(compra)" nzGhost>
+            <i nz-icon nzType="stop"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
